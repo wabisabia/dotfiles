@@ -24,7 +24,6 @@ Plug 'preservim/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 
 " LSPs
-Plug 'neovim/nvim-lspconfig'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Filetype-specific
@@ -42,8 +41,8 @@ set number
 set relativenumber
 
 " Whitespace
-set wrap
-set textwidth=79
+set nowrap
+set textwidth=80
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -61,7 +60,6 @@ set showmatch
 
 " Visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬,space:•
-map <leader>l :set list!<CR>
 
 " Search with ripgrep
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
@@ -70,11 +68,12 @@ set grepformat=%f:%l:%c:%m,%f:%l:%m
 " Color scheme
 autocmd vimenter * ++nested colorscheme gruvbox
 
-" ================ REMAPS =================
+" ================ NON-PLUGIN REMAPS =================
 
 nnoremap Y y$
+map <leader>v :set list!<CR>
 
-" ================= PLUGIN SETTINGS =================
+" =========== PLUGIN SETTINGS AND REMAPS =================
 
 " == neovide ==
 let g:neovide_refresh_rate=120
@@ -271,18 +270,18 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <leader>cd  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <leader>ld  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<cr>
+nnoremap <silent><nowait> <leader>le  :<C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <leader>lc  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <leader>lo  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <leader>ls  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent><nowait> <leader>cj  :<C-u>CocNext<CR>
+nnoremap <silent><nowait> <leader>lj  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
+nnoremap <silent><nowait> <leader>lk  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <leader>cl  :<C-u>CocListResume<CR>
+nnoremap <silent><nowait> <leader>ll  :<C-u>CocListResume<CR>
