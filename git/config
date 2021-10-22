@@ -1,0 +1,17 @@
+[core]
+	autocrlf = false
+[user]
+	email = bkkchris.dunn@outlook.com
+	name = wabisabia
+[pager]
+  diff = delta
+  log  = delta
+  refl = deltaog
+  show = delta
+[interactive]
+  diffFilter = delta --color-only --features=interactive
+[delta]
+  line-numbers = true
+  navigate = true
+[diff]
+  colorMoved = default
