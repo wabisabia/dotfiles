@@ -6,7 +6,7 @@ Install the following programs via the native package manager or through
 `cargo`:
 
  Program                                        | Description
- -                                              |
+ -                                              | -
  [`bat`](https://github.com/sharkdp/bat)        | Pretty-print file contents (drop-in for `cat`)
  [`sd`](https://github.com/chmln/sd)            | Search and replace (drop-in for `sed`)
  [`fd`](https://github.com/sharkdp/fd)          | File-finder (drop-in for `find`)
