@@ -4,7 +4,7 @@
 
 ### Command Line Utilities
 
-Install the following programs via the native package manager or through `cargo`:
+Install the following programs via the native package manager (`choco` on Windows, `brew` on MacOS) or through `cargo`:
 
 Program                                             | Purpose                    | Replaces      | Alternative Purpose
 ---                                                 | ---                        | ---           | ---
