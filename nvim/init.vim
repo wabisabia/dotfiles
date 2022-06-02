@@ -16,10 +16,11 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'PeterRincker/vim-argumentative'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-fugitive'
-Plug 'mhinz/vim-signify'
+" Plug 'mhinz/vim-signify'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'preservim/tagbar', { 'on': 'TagbarToggle' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+set rtp+=/opt/homebrew/opt/fzf
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
@@ -34,6 +35,9 @@ call plug#end()
 
 let mapleader = " "
 
+" Global status line
+set laststatus=3
+
 " Block cursor in insert mode
 set guicursor=i:block
 
@@ -41,12 +45,14 @@ set guicursor=i:block
 set number
 set relativenumber
 
-" Whitespace
+" Wrapping
 set nowrap
 set textwidth=80
+
+" Tab behaviour
 set tabstop=2
-set shiftwidth=2
 set softtabstop=2
+set shiftwidth=2
 
 " Cursor motion
 set scrolloff=12
@@ -76,6 +82,9 @@ nnoremap <leader>vw :set list!<CR>
 nnoremap <leader>w <C-w>w
 nnoremap / /\v
 vnoremap / /\v
+nnoremap <leader>d :bd<CR>
+nmap <leader>[ [b
+nmap <leader>] ]b
 
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
@@ -140,6 +149,11 @@ nnoremap <silent><nowait> <leader>lj  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <leader>lk  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <leader>ll  :<C-u>CocListResume<CR>
 
+nnoremap <leader>sf :GFiles<CR>
+nnoremap <leader>st :Tags<CR>
+nnoremap <leader>sp :RG<CR>
+nnoremap <leader>sP :Rg<CR>
+
 " =========== PLUGIN SETTINGS AND REMAPS =================
 
 " == coc-prettier ==
@@ -151,6 +165,9 @@ let g:neovide_transparency=0.95
 let g:neovide_fullscreen=v:true
 let g:neovide_cursor_animation_length=0.05
 set guifont=FiraCode\ NF:h22
+
+" == vim-gutentags ==
+let g:gutentags_file_list_command = "rg --files"
 
 " == vim-commentary ==
 autocmd FileType toml setlocal commentstring=#\ %s
@@ -171,6 +188,9 @@ let g:signify_sign_delete = ''
 let g:signify_sign_change = ''
 
 " == fzf.vim ==
+command! -bang -nargs=? GFiles
+    \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+
 function! RipgrepFzf(query, fullscreen)
   let command_fmt = 'rg --column --line-number --no-heading --color=always --hidden --smart-case -- %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))

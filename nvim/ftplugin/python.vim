@@ -1,1 +1,1 @@
-nnoremap <leader>ar :!python %<CR>
+nnoremap <leader>ar :!python3 %<CR>
