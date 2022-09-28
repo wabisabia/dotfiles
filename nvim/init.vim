@@ -31,6 +31,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Filetype-specific
 Plug 'dag/vim-fish', { 'for': 'fish' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
 
 let mapleader = " "
