@@ -1,17 +1,18 @@
 [core]
 	autocrlf = false
-[user]
-	email = bkkchris.dunn@outlook.com
-	name = wabisabia
-[pager]
-  diff = delta
-  log  = delta
-  refl = deltaog
-  show = delta
+	pager = delta
+	editor = nvim
+
 [interactive]
   diffFilter = delta --color-only --features=interactive
+
 [delta]
+	features = decorations
   line-numbers = true
   navigate = true
+
+[merge]
+	conflictstyle = diff3
+
 [diff]
   colorMoved = default
