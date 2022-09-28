@@ -82,7 +82,7 @@ nnoremap <leader>vw :set list!<CR>
 nnoremap <leader>w <C-w>w
 nnoremap / /\v
 vnoremap / /\v
-nnoremap <leader>d :bd<CR>
+nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
 nmap <leader>[ [b
 nmap <leader>] ]b
 
