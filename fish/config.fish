@@ -20,6 +20,7 @@ if status is-interactive
     abbr -a e "nvim"
 
 		fish_vi_key_bindings
+    fzf_configure_bindings --directory=\cf
 end
 
 starship init fish | source
