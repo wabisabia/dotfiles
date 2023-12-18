@@ -1,18 +1,18 @@
 [core]
-	autocrlf = false
-	pager = delta
-	editor = nvim
+  autocrlf = false
+  pager = delta
+  editor = nvim
 
 [interactive]
   diffFilter = delta --color-only --features=interactive
 
 [delta]
-	features = decorations
+  features = decorations
   line-numbers = true
   navigate = true
 
 [merge]
-	conflictstyle = diff3
+  conflictstyle = diff3
 
 [diff]
   colorMoved = default
