@@ -1,1 +1,2 @@
-/Applications/Docker.app/Contents/Resources/etc/docker.fish-completion
+# Completions for Docker are maintained upstream.
+# They should be installed with the Docker package.

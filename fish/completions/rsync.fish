@@ -22,7 +22,6 @@ complete -c rsync -s q -l quiet -d "Suppress non-error messages"
 complete -c rsync -l no-motd -d "Suppress daemon-mode MOTD"
 complete -c rsync -s c -l checksum -d "Skip based on checksum, not mod-time & size"
 complete -c rsync -s a -l archive -d "Archive mode; same as -rlptgoD (no -H)"
-complete -c rsync -l no-OPTION -d "Turn off an implied OPTION (e.g. --no-D)"
 complete -c rsync -s r -l recursive -d "Recurse into directories"
 complete -c rsync -s R -l relative -d "Use relative path names"
 complete -c rsync -l no-implied-dirs -d "Don’t send implied dirs with --relative"
@@ -106,7 +105,7 @@ complete -c rsync -l modify-window -xa '(seq 0 10)' -d "Compare NUM mod-times wi
 complete -c rsync -s T -l temp-dir -xa '(__fish_complete_directories)' -d "Create temporary files in directory DIR"
 complete -c rsync -s y -l fuzzy -d "Find similar file for basis if no dest file"
 complete -c rsync -l compare-dest -xa '(__fish_complete_directories)' -d "Also compare received files relative to DIR"
-complete -c rsync -l copy-dest -xa '(__fish_complete_directories)' -d "Also compare received files relative to DIR and include copies of unchanged files"
+complete -c rsync -l copy-dest -xa '(__fish_complete_directories)' -d "Like compare-dest but also copies unchanged files"
 complete -c rsync -l link-dest -xa '(__fish_complete_directories)' -d "Hardlink to files in DIR when unchanged"
 complete -c rsync -s z -l compress -d "Compress file data during the transfer"
 complete -c rsync -l zc -l compress-choice -xa 'zstd lz4 zlibx zlib none' -d "Choose the compression algorithm"
@@ -176,6 +175,28 @@ complete -c rsync -d Hostname -a "
 #
 # Remote path
 #
+# Unfortunately, the escaping changed in version 3.2.4.
+# Even more unfortunate, rsync's version output is horrible:
+# rsync  version v3.2.4  protocol version 31
+# Copyright (C) 1996-2022 by Andrew Tridgell, Wayne Davison, and others.
+# Web site: https://rsync.samba.org/
+# ... (and then a ton of lines about capabilities)
+#
+# This includes multiple spaces, the version might start with "v" depending on whether it's
+# built from a git tag or not...
+
+set -l new_escaping # has an element if the new escaping style introduced in 3.2.4 is required
+
+set -l rsync_ver (rsync --version |
+                  string replace -rf '^rsync +version\D+([\d.]+) .*' '$1' |
+                  string split .)
+
+if test "$rsync_ver[1]" -gt 3 2>/dev/null
+    or test "$rsync_ver[1]" -eq 3 -a "$rsync_ver[2]" -gt 2 2>/dev/null
+    or test "$rsync_ver[1]" -eq 3 -a "$rsync_ver[2]" -eq 2 -a "$rsync_ver[3]" -gt 3 2>/dev/null
+    set new_escaping 1
+end
+
 complete -c rsync -d "Remote path" -n "commandline -ct | string match -q '*:*'" -xa "
 (
 	# Prepend any user@host:/path information supplied before the remote completion.
@@ -183,7 +204,7 @@ complete -c rsync -d "Remote path" -n "commandline -ct | string match -q '*:*'" 
 )(
 	# Get the list of remote files from the specified rsync server.
         rsync --list-only (__rsync_remote_target) 2>/dev/null | string replace -r '^d.*' '\$0/' |
-        string replace -r '(\S+\s+){4}' '' | # drop the first four columns
-        string escape -n
+        string replace -r '(\S+\s+){4}' '' |
+        string match --invert './' $(set -q new_escaping[1]; or echo ' | string escape -n'; echo)
 )
 "

@@ -4,10 +4,12 @@
 # Also the manpage and even the grammar it accepts is utter shite (options can only be before commands, some things are only in the BNF, others only in the text)
 # It also quite likes the word "dev", even though it needs it less than the BNF specifies
 
-set -l ip_commands link address addrlabel route rule neigh ntable tunnel tuntap maddr mroute mrule monitor xfrm netns l2tp tcp_metrics
+set -l ip_commands link address addrlabel route rule neighbour ntable tunnel tuntap maddr mroute mrule monitor xfrm netns l2tp tcp_metrics
 set -l ip_addr a ad add addr addre addres address
 set -l ip_link l li lin link
-set -l ip_all_commands $ip_commands $ip_addr $ip_link
+set -l ip_neigh n ne nei neig neigh neighb neighbo neighbor neighbour
+set -l ip_route r ro rou rout route
+set -l ip_all_commands $ip_commands $ip_addr $ip_link $ip_neigh $ip_route
 
 function __fish_ip_commandwords
     set -l skip 0
@@ -60,10 +62,10 @@ function __fish_ip_commandwords
                 else
                     echo $word
                 end
-            case n ne nei neig neigh
+            case n ne nei neig neigh neighb neighbo neighbor neighbour
                 if test $have_command = 0
                     set have_command 1
-                    echo neigh
+                    echo neighbour
                 else
                     echo $word
                 end
@@ -177,7 +179,7 @@ end
 
 function __fish_ip_device
     command ip -o link show | while read -l a b c
-        printf '%s\t%s\n' (string replace ':' '' -- $b) Device
+        printf '%s\t%s\n' (string replace -r '(@.*)?:' '' -- $b) Device
     end
 end
 
@@ -236,6 +238,18 @@ function __fish_ip_types
         netdevsim "Interface for netdev API tests" \
         rmnet "Qualcomm rmnet device" \
         xfrm "Virtual xfrm interface"
+end
+
+function __fish_ip_neigh_states
+    printf '%s\t%s\n' permanent "entry is valid forever" \
+        noarp "entry is valid without validation" \
+        reachable "entry is valid until timeout" \
+        stale "entry is valid but suspicious" \
+        none "pseudo state" \
+        incomplete "entry has not yet been validated" \
+        delay "entry validation is currently delayed" \
+        probe "neighbor is being probed" \
+        failed "neighbor validation has ultimately failed"
 end
 
 function __fish_complete_ip
@@ -298,27 +312,27 @@ function __fish_complete_ip
                                         end
                                         # TODO: Moar
                                 end
-                            case show save flush # These take the same args
-                                switch $cmd[-2]
-                                    case dev
-                                        __fish_ip_device
-                                    case scope
-                                        __fish_ip_scope
-                                    case to
-                                        # Prefix
-                                    case label
-                                        # Label-pattern
-                                    case '*'
-                                        printf '%s\t%s\n' up "Only active devices" \
-                                            dev "Limit to a certain device" \
-                                            scope "Limit scope" \
-                                            to "Limit prefix" \
-                                            label "Limit by label" \
-                                            dynamic "(Ipv6 only) Limit to dynamic addresses" \
-                                            permanent "(Ipv6 only) Limit to permanent addresses"
-                                        __fish_ip_device
-                                        # TODO: Moar
-                                end
+                        end
+                    case show save flush # These take the same args
+                        switch $cmd[-2]
+                            case dev
+                                __fish_ip_device
+                            case scope
+                                __fish_ip_scope
+                            case to
+                                # Prefix
+                            case label
+                                # Label-pattern
+                            case '*'
+                                printf '%s\t%s\n' up "Only active devices" \
+                                    dev "Limit to a certain device" \
+                                    scope "Limit scope" \
+                                    to "Limit prefix" \
+                                    label "Limit by label" \
+                                    dynamic "(Ipv6 only) Limit to dynamic addresses" \
+                                    permanent "(Ipv6 only) Limit to permanent addresses"
+                                __fish_ip_device
+                                # TODO: Moar
                         end
                 end
             end
@@ -362,6 +376,21 @@ function __fish_complete_ip
                                     gso_max_segs
                         end
                     case delete
+                        switch $cmd[-2]
+                            case delete
+                                __fish_ip_device
+                                echo dev
+                                echo group
+                            case dev
+                                __fish_ip_device
+                            case group
+                            case type
+                                __fish_ip_types
+                            case '*'
+                                if not set -q cmd[6]
+                                    echo type
+                                end
+                        end
                     case set
                         switch $cmd[-2]
                             case type
@@ -402,9 +431,91 @@ function __fish_complete_ip
                     case help
                 end
             end
+        case neighbour
+            if not set -q cmd[3]
+                printf '%s\t%s\n' help "Show help" \
+                    add "Add new neighbour entry" \
+                    delete "Delete neighbour entry" \
+                    change "Change neighbour entry" \
+                    replace "Add or change neighbour entry" \
+                    show "List neighbour entries" \
+                    flush "Flush neighbour entries" \
+                    get "Lookup neighbour entry"
+            else
+                switch $cmd[2]
+                    case add del delete change replace
+                        switch $cmd[-2]
+                            case lladdr
+                            case nud
+                                __fish_ip_neigh_states
+                            case proxy
+                            case dev
+                                __fish_ip_device
+                            case '*'
+                                echo lladdr
+                                echo nud
+                                echo proxy
+                                echo dev
+                                echo router
+                                echo use
+                                echo managed
+                                echo extern_learn
+                        end
+                    case show flush
+                        switch $cmd[-2]
+                            case to
+                            case dev
+                                __fish_ip_device
+                            case vrf
+                            case nud
+                                __fish_ip_neigh_states
+                                echo all
+                            case '*'
+                                echo to
+                                echo dev
+                                echo vrf
+                                echo nomaster
+                                echo proxy
+                                echo unused
+                                echo nud
+                        end
+                    case get
+                        switch $cmd[-2]
+                            case to
+                            case dev
+                                __fish_ip_device
+                            case '*'
+                                echo proxy
+                                echo to
+                                echo dev
+                        end
+                end
+            end
+        case route
+            if not set -q cmd[3]
+                printf '%s\t%s\n' add "Add new route" \
+                    change "Change route" \
+                    append "Append route" \
+                    replace "Change or add new route" \
+                    delete "Delete route" \
+                    show "List routes" \
+                    flush "Flush routing tables" \
+                    get "Get a single route" \
+                    save "Save routing table to stdout" \
+                    showdump "Show saved routing table from stdin" \
+                    restore "Restore routing table from stdin"
+            else
+                # TODO: switch on $cmd[2] and complete subcommand specific arguments
+                # for now just complete device names when dev was the last token
+                switch $cmd[-2]
+                    case dev
+                        __fish_ip_device
+                end
+            end
         case netns
             if not set -q cmd[3]
                 printf '%s\t%s\n' add "Add network namespace" \
+                    attach "Attach process to network namespace" \
                     delete "Delete network namespace" \
                     set "Change network namespace attributes" \
                     identify "Display network namespace for a process id" \
@@ -416,9 +527,33 @@ function __fish_complete_ip
             else
                 switch $cmd[2]
                     case delete
-                        __fish_ip_netns_list
+                        if not set -q cmd[4]
+                            __fish_ip_netns_list
+                        end
                     case exec
-                        __fish_ip_netns_list
+                        if not set -q cmd[4]
+                            __fish_ip_netns_list
+                        else
+                            __fish_complete_subcommand --commandline $cmd[4..-1]
+                        end
+                    case pids
+                        if not set -q cmd[4]
+                            __fish_ip_netns_list
+                        end
+                    case set
+                        if not set -q cmd[4]
+                            __fish_ip_netns_list
+                        end
+                    case attach
+                        if not set -q cmd[4]
+                            __fish_ip_netns_list
+                        else
+                            __fish_complete_pids
+                        end
+                    case identify
+                        if not set -q cmd[4]
+                            __fish_complete_pids
+                        end
                 end
             end
     end
@@ -428,6 +563,7 @@ complete -f -c ip
 complete -f -c ip -a '(__fish_complete_ip)'
 complete -f -c ip -n "not __fish_seen_subcommand_from $ip_all_commands" -a "$ip_commands"
 # Yes, ip only takes options before "objects"
+complete -c ip -s h -l human -d "Output statistics with human readable values" -n "not __fish_seen_subcommand_from $ip_commands"
 complete -c ip -s b -l batch -d "Read commands from file or stdin" -n "not __fish_seen_subcommand_from $ip_commands"
 complete -c ip -l force -d "Don't terminate on errors in batch mode" -n "not __fish_seen_subcommand_from $ip_commands"
 complete -c ip -s V -l Version -d "Print the version" -n "not __fish_seen_subcommand_from $ip_commands"
@@ -438,10 +574,17 @@ complete -c ip -f -s f -l family -d "The protocol family to use" -a "inet inet6 
 complete -c ip -f -s 4 -d "Short for --family inet" -n "not __fish_seen_subcommand_from $ip_commands"
 complete -c ip -f -s 6 -d "Short for --family inet6" -n "not __fish_seen_subcommand_from $ip_commands"
 complete -c ip -f -s B -d "Short for --family bridge" -n "not __fish_seen_subcommand_from $ip_commands"
-complete -c ip -f -s D -d "Short for --family decnet" -n "not __fish_seen_subcommand_from $ip_commands"
-complete -c ip -f -s I -d "Short for --family ipx" -n "not __fish_seen_subcommand_from $ip_commands"
-complete -c ip -f -s O -d "Short for --family link" -n "not __fish_seen_subcommand_from $ip_commands"
+complete -c ip -f -s M -d "Short for --family mpls" -n "not __fish_seen_subcommand_from $ip_commands"
+complete -c ip -f -s 0 -d "Short for --family link" -n "not __fish_seen_subcommand_from $ip_commands"
 complete -c ip -f -s o -l oneline -d "Output on one line" -n "not __fish_seen_subcommand_from $ip_commands"
 complete -c ip -f -s r -l resolve -d "Resolve names and print them instead of addresses" -n "not __fish_seen_subcommand_from $ip_commands"
-complete -c ip -f -s n -l net -l netns -d "Use specified network namespace" -n "not __fish_seen_subcommand_from $ip_commands"
+complete -c ip -f -s n -l netns -d "Use specified network namespace" -n "not __fish_seen_subcommand_from $ip_commands"
 complete -c ip -f -s a -l all -d "Execute command for all objects" -n "not __fish_seen_subcommand_from $ip_commands"
+complete -c ip -f -s c -l color -d "Configure color output" -n "not __fish_seen_subcommand_from $ip_commands"
+complete -c ip -f -s t -l timestamp -d "Display current time when using monitor" -n "not __fish_seen_subcommand_from $ip_commands"
+complete -c ip -f -o ts -l tshort -d "Like -timestamp, but shorter format" -n "not __fish_seen_subcommand_from $ip_commands"
+complete -c ip -f -o rc -l rcvbuf -d "Set the netlink socket receive buffer size" -n "not __fish_seen_subcommand_from $ip_commands"
+complete -c ip -f -o iec -d "Print human readable rates in IEC units" -n "not __fish_seen_subcommand_from $ip_commands"
+complete -c ip -f -o br -l brief -d "Print only basic information in a tabular format" -n "not __fish_seen_subcommand_from $ip_commands"
+complete -c ip -f -s j -l json -d "Output results in JSON" -n "not __fish_seen_subcommand_from $ip_commands"
+complete -c ip -f -s p -l pretty -d "Output results in pretty JSON" -n "not __fish_seen_subcommand_from $ip_commands"

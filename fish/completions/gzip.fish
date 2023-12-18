@@ -1,13 +1,9 @@
 complete -c gzip -s c -l stdout -d "Compress to stdout"
-complete -c gzip -s d -l decompress -k -x -a "
-(
-	__fish_complete_suffix .gz
-	__fish_complete_suffix .tgz
-)
-"
+complete -c gzip -s d -l decompress -k -x -a "(__fish_complete_suffix .gz .tgz)"
 
 complete -c gzip -s f -l force -d Overwrite
 complete -c gzip -s h -l help -d "Display help and exit"
+complete -c gzip -s k -l keep -d "Keep input files"
 complete -c gzip -s l -l list -d "List compression information"
 complete -c gzip -s L -l license -d "Print license"
 complete -c gzip -s n -l no-name -d "Do not save/restore filename"
