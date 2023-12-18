@@ -7,12 +7,15 @@ if status is-interactive
     abbr -a fo "nvim ~/.config/fish/config.fish && source ~/.config/fish/config.fish"
 
 		abbr -a gs "git status"
+    abbr -a gl "git log"
+    abbr -a gln "git log -n"
 		abbr -a gd "git diff"
 		abbr -a gds "git diff --staged"
 		abbr -a ga "git add"
 		abbr -a gu "git restore --staged"
     abbr -a gc "git commit"
     abbr -a gcm "git commit -m"
+    abbr -a gca "git commit --amend"
 
     abbr -a e "nvim"
 
