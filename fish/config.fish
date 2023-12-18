@@ -4,6 +4,7 @@ if status is-interactive
 
     abbr -a fo "nvim ~/.config/fish/config.fish && source ~/.config/fish/config.fish"
 
+    abbr -a gf "git fetch"
 		abbr -a gs "git status"
     abbr -a gl "git log"
     abbr -a gln "git log -n"
@@ -14,6 +15,7 @@ if status is-interactive
     abbr -a gc "git commit"
     abbr -a gcm "git commit -m"
     abbr -a gca "git commit --amend"
+    abbr -a gp "git push"
 
     abbr -a e "nvim"
 
