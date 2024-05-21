@@ -17,6 +17,7 @@ if status is-interactive
     abbr -a gcm "git commit -m"
     abbr -a gca "git commit --amend"
     abbr -a gps "git push"
+    abbr -a gpr "git remote update origin --prune"
 
     abbr -a e "nvim"
 
