@@ -1,0 +1,13 @@
+# Security
+fish/fish_variables
+
+# Would rather not store these
+fish/completions/
+fish/functions/
+fish/conf.d/
+
+# Created by iTerm2
+iterm2/
+
+# No version constraints needed
+lazy-lock.json

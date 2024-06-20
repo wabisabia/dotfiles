@@ -7,8 +7,17 @@ local utils = require "core.utils"
 -- export on_attach & capabilities for custom lspconfigs
 
 M.on_attach = function(client, bufnr)
-  client.server_capabilities.documentFormattingProvider = false
-  client.server_capabilities.documentRangeFormattingProvider = false
+  local formattingProvider = true
+  if client.name == "pyright" or client.name == "jedi_language_server" then
+    formattingProvider = false
+  end
+
+  client.server_capabilities.documentFormattingProvider = formattingProvider
+  client.server_capabilities.documentRangeFormattingProvider = true
+
+  if client.name == "ruff" then
+    client.server_capabilities.hoverProvider = false
+  end
 
   utils.load_mappings("lspconfig", { buffer = bufnr })
 
@@ -44,7 +53,32 @@ M.capabilities.textDocument.completion.completionItem = {
 require("lspconfig").lua_ls.setup {
   on_attach = M.on_attach,
   capabilities = M.capabilities,
+  on_init = function(client)
+    local path = client.workspace_folders[1].name
+    if vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc') then
+      return
+    end
 
+    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+      runtime = {
+        -- Tell the language server which version of Lua you're using
+        -- (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT'
+      },
+      -- Make the server aware of Neovim runtime files
+      workspace = {
+        checkThirdParty = false,
+        library = {
+          vim.env.VIMRUNTIME,
+          -- Depending on the usage, you might want to add additional paths here.
+          "${3rd}/luv/library"
+          -- "${3rd}/busted/library",
+        }
+        -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+        -- library = vim.api.nvim_get_runtime_file("", true)
+      }
+    })
+  end,
   settings = {
     Lua = {
       diagnostics = {
