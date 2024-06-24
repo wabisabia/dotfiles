@@ -28,6 +28,8 @@ map("n", "/", "/\\v", { desc = "search regex" })
 
 map("n", "L", vim.diagnostic.open_float, { desc = "diagnostics show in floating window" })
 
+map("n", "<leader>tt", "<cmd>Trouble todo toggle filter.buf=0<cr>", { desc = "todos in buffer" })
+map("n", "<leader>tT", "<cmd>Trouble todo toggle<cr>", { desc = "todos in project" })
 map("n", "<leader>td", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "diagnostics in buffer" })
 map("n", "<leader>tD", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "diagnostics in project" })
 map("n", "<leader>ts", "<cmd>Trouble symbols toggle<cr>", { desc = "symbols in buffer" })

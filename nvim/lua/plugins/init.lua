@@ -50,4 +50,10 @@ return {
     lazy = false,
     cmd = "Trouble",
   },
+
+  {
+    "folke/todo-comments.nvim",
+    lazy = false,
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
 }
