@@ -1,4 +1,15 @@
-local on_attach = require("nvchad.configs.lspconfig").on_attach
+local on_attach = function(client, bufnr)
+  require("nvchad.configs.lspconfig").on_attach(client, bufnr)
+
+  local function opts(desc)
+    return { buffer = bufnr, desc = desc }
+  end
+
+  local map = vim.keymap.set
+
+  map("n", "gd", "<cmd>Trouble lsp_definitions<cr>", opts "definitions list")
+  map("n", "gr", "<cmd>Trouble lsp_references<cr>", opts "references list")
+end
 local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
 
