@@ -55,6 +55,7 @@ return {
   {
     "folke/todo-comments.nvim",
     lazy = false,
+    opts = {},
     dependencies = { "nvim-lua/plenary.nvim" },
   },
 }
