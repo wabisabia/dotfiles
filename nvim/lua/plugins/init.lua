@@ -48,6 +48,7 @@ return {
   {
     "folke/trouble.nvim",
     lazy = false,
+    opts = {},
     cmd = "Trouble",
   },
 
