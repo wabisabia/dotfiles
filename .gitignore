@@ -1,3 +1,9 @@
+*
+!.config
+!.config/*
+!.gitignore
+!README.md
+
 # Security
 fish/fish_variables
 
