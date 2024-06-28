@@ -1,4 +1,6 @@
-local options = {
+local configs = require "nvim-treesitter.configs"
+
+configs.setup {
   ensure_installed = { "lua", "luadoc", "printf", "vim", "vimdoc" },
 
   highlight = {
@@ -43,5 +45,3 @@ local options = {
     },
   },
 }
-
-return options

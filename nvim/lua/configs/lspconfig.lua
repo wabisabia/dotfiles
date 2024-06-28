@@ -1,25 +1,9 @@
-local on_attach = function(client, bufnr)
-  require("nvchad.configs.lspconfig").on_attach(client, bufnr)
-
-  local function opts(desc)
-    return { buffer = bufnr, desc = desc }
-  end
-
-  local map = vim.keymap.set
-
-  map("n", "gd", "<cmd>Trouble lsp_definitions<cr>", opts "definitions list")
-  map("n", "gr", "<cmd>Trouble lsp_references<cr>", opts "references list")
-end
-local on_init = require("nvchad.configs.lspconfig").on_init
-local capabilities = require("nvchad.configs.lspconfig").capabilities
-
 local lspconfig = require "lspconfig"
+
 local servers = {
-  "clangd",
   "dockerls",
-  "jedi_language_server",
+  -- "fish_lsp",
   "marksman",
-  "ruff",
   "rust_analyzer",
   "taplo",
   "terraformls",
@@ -27,70 +11,109 @@ local servers = {
   "yamlls",
 }
 
+---@type fun(client:vim.lsp.Client, bufnr:integer)
+local on_attach = function(_, bufnr)
+  ---@type fun(desc:string):table
+  local function opts(desc)
+    return { buffer = bufnr, desc = desc }
+  end
+
+  local map = vim.keymap.set
+
+  map("n", "gd", "<cmd>Trouble close<cr><cmd>Trouble lsp_definitions first<cr>", opts "definitions in project")
+  map("n", "gr", "<cmd>Trouble close<cr><cmd>Trouble lsp_references first<cr>", opts "references in project")
+  map("n", "gD", vim.lsp.buf.declaration, opts "Go to declaration")
+  map("n", "gi", vim.lsp.buf.implementation, opts "Go to implementation")
+  map("n", "<leader>sh", vim.lsp.buf.signature_help, opts "Show signature help")
+  map("n", "<leader>rn", function()
+    vim.ui.input({ prompt = "Rename to: " }, function(input)
+      vim.lsp.buf.rename(input)
+    end)
+  end, opts "Rename")
+  map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts "Add workspace folder")
+  map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts "Remove workspace folder")
+
+  map("n", "<leader>wl", function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, opts "List workspace folders")
+
+  map("n", "<leader>D", vim.lsp.buf.type_definition, opts "Go to type definition")
+
+  map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts "Code action")
+end
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem = {
+  snippetSupport = true,
+  preselectSupport = true,
+  insertReplaceSupport = true,
+  labelDetailsSupport = true,
+  deprecatedSupport = true,
+  commitCharactersSupport = true,
+  tagSupport = { valueSet = { 1 } },
+  resolveSupport = {
+    properties = {
+      "documentation",
+      "detail",
+      "additionalTextEdits",
+    },
+  },
+}
+
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
-    on_attach = on_attach,
     capabilities = capabilities,
-    on_init = on_init,
+    on_attach = on_attach,
   }
 end
 
 lspconfig.lua_ls.setup {
-  on_attach = on_attach,
   capabilities = capabilities,
-  on_init = function(client)
-    local path = client.workspace_folders[1].name
-    if vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc") then
-      return
-    end
+  on_attach = on_attach,
+}
 
-    client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
-      runtime = {
-        -- Tell the language server which version of Lua you're using
-        -- (most likely LuaJIT in the case of Neovim)
-        version = "LuaJIT",
-      },
-      -- Make the server aware of Neovim runtime files
-      workspace = {
-        checkThirdParty = false,
-        library = {
-          vim.env.VIMRUNTIME,
-          -- Depending on the usage, you might want to add additional paths here.
-          "${3rd}/luv/library",
-          -- "${3rd}/busted/library",
-        },
-        -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
-        -- library = vim.api.nvim_get_runtime_file("", true)
-      },
-    })
-  end,
+lspconfig.ruff.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  cmd_env = { RUFF_TRACE = "messages" },
   settings = {
-    Lua = {
-      diagnostics = {
-        globals = { "vim" },
-      },
-      workspace = {
-        library = {
-          [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-          [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-          [vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types"] = true,
-          [vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy"] = true,
-        },
-        maxPreload = 100000,
-        preloadFileSize = 10000,
-      },
+    args = {
+      "--line-length=120",
+    },
+  },
+  init_options = {
+    settings = {
+      logLevel = "debug",
     },
   },
 }
 
 lspconfig.pyright.setup {
-  on_attach = on_attach,
   capabilities = capabilities,
-  on_init = on_init,
+  on_attach = on_attach,
   settings = {
     pyright = {
       -- Using Ruff's import organizer
       disableOrganizeImports = true,
     },
+    python = {
+      analysis = {
+        diagnosticMode = "workspace",
+      },
+    },
   },
+}
+
+lspconfig.jedi_language_server.setup {
+  capabilities = capabilities,
+  ---@param client vim.lsp.Client
+  ---@param bufnr integer
+  on_attach = function(client, bufnr)
+    -- pyright does these better / faster
+    client.server_capabilities.referencesProvider = nil
+    client.server_capabilities.definitionProvider = nil
+    client.server_capabilities.renameProvider = nil
+    client.server_capabilities.documentSymbolProvider = nil
+    on_attach(client, bufnr)
+  end,
 }

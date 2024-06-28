@@ -1,4 +1,4 @@
-local options = {
+return {
   formatters_by_ft = {
     lua = { "stylua" },
     python = { "ruff_format", "ruff_organize_imports" },
@@ -11,7 +11,8 @@ local options = {
         "--force-exclude",
         "--stdin-filename",
         "$FILENAME",
-        "--line-length=120",
+        "--line-length",
+        "120",
         "-",
       },
     },
@@ -20,12 +21,14 @@ local options = {
         "check",
         "--fix",
         "--force-exclude",
-        "--select=I001",
+        "--select",
+        "I001",
         "--exit-zero",
         "--no-cache",
         "--stdin-filename",
         "$FILENAME",
-        "--line-length=120",
+        "--line-length",
+        "120",
         "-",
       },
     },
@@ -37,5 +40,3 @@ local options = {
     lsp_fallback = true,
   },
 }
-
-require("conform").setup(options)
