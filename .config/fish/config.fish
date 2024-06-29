@@ -24,6 +24,10 @@ if status is-interactive
 
     fish_vi_key_bindings
     fzf_configure_bindings --directory=\cf
+
+    if test -e .venv
+        source .venv/bin/activate.fish
+    end
 end
 
 starship init fish | source
