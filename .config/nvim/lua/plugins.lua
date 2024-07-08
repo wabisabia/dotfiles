@@ -114,6 +114,7 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lsp-signature-help",
       "windwp/nvim-autopairs",
+      "onsails/lspkind.nvim",
     },
   },
 
@@ -165,6 +166,10 @@ return {
     config = function()
       require "configs.lspconfig"
     end,
+  },
+
+  {
+    "onsails/lspkind.nvim",
   },
 
   {

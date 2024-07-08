@@ -4,6 +4,8 @@ local mapping = cmp.mapping
 
 local luasnip = require "luasnip"
 
+local lspkind = require "lspkind"
+
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -51,7 +53,7 @@ cmp.setup {
     end, { "i", "s" }),
     ["<C-u>"] = mapping.scroll_docs(-4),
     ["<C-d>"] = mapping.scroll_docs(4),
-    ["<C-Space>"] = mapping.complete(),
+    ["<C-n>"] = mapping.complete(),
     ["<C-e>"] = mapping.abort(),
   },
 
@@ -59,7 +61,15 @@ cmp.setup {
     { name = "nvim_lsp_signature_help" },
     { name = "nvim_lsp" },
     { name = "luasnip" },
-    { name = "buffer" },
+  },
+
+  formatting = {
+    format = lspkind.cmp_format {
+      mode = "symbol",
+      maxwidth = 50,
+      ellipsis_char = "...",
+      show_labelDetails = true,
+    },
   },
 }
 
