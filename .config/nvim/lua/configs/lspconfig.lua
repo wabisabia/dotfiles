@@ -3,6 +3,7 @@ local lspconfig = require "lspconfig"
 local servers = {
   "dockerls",
   -- "fish_lsp",
+  "jsonls",
   "marksman",
   "rust_analyzer",
   "taplo",
@@ -42,23 +43,9 @@ local on_attach = function(_, bufnr)
   map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts "Code action")
 end
 
+local cmp_lsp = require "cmp_nvim_lsp"
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem = {
-  snippetSupport = true,
-  preselectSupport = true,
-  insertReplaceSupport = true,
-  labelDetailsSupport = true,
-  deprecatedSupport = true,
-  commitCharactersSupport = true,
-  tagSupport = { valueSet = { 1 } },
-  resolveSupport = {
-    properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits",
-    },
-  },
-}
+capabilities.textDocument = cmp_lsp.default_capabilities().textDocument
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {

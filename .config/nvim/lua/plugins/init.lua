@@ -1,3 +1,6 @@
+require "lazy"
+
+---@type LazyPluginSpec[]
 return {
   -- We don't know where we are...
   {
@@ -10,8 +13,8 @@ return {
   {
     "nvim-tree/nvim-tree.lua",
     version = "*",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {},
+    dependencies = "nvim-tree/nvim-web-devicons",
+    opts = require "opts.nvim-tree",
   },
 
   {
@@ -20,9 +23,10 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-fzf-native.nvim",
       "nvim-treesitter/nvim-treesitter",
+      "folke/trouble.nvim",
     },
     config = function()
-      require("telescope").load_extension "fzf"
+      require "configs.telescope"
     end,
   },
 
@@ -31,35 +35,18 @@ return {
     build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
   },
 
-  -- ... or what we're doing...
-  {
-    "sudormrfbin/cheatsheet.nvim",
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-lua/popup.nvim",
-    },
-  },
-
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-  },
-
   -- ... at least we know what vim is doing
   {
     "nvim-lua/plenary.nvim",
   },
 
   {
+    "nvim-neotest/nvim-nio",
+  },
+
+  {
     "rcarriga/nvim-notify",
-    opts = {
-      fps = 120,
-      render = "wrapped-compact",
-      stages = "no_animation",
-      timeout = 2000,
-      top_down = false,
-    },
+    opts = require "opts.notify",
     init = function()
       vim.notify = require "notify"
     end,
@@ -82,15 +69,21 @@ return {
   },
 
   {
+    "echasnovski/mini.align",
+    version = "*",
+    opts = {},
+  },
+
+  {
     "folke/trouble.nvim",
-    opts = require "configs.trouble",
+    opts = require "opts.trouble",
     cmd = "Trouble",
   },
 
   {
     "folke/todo-comments.nvim",
-    opts = require "configs.todo",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = require "opts.todo",
+    dependencies = "nvim-lua/plenary.nvim",
   },
 
   -- We can edit structured text??
@@ -100,7 +93,7 @@ return {
     config = function()
       require "configs.treesitter"
     end,
-    dependencies = { { "nvim-treesitter/nvim-treesitter-textobjects" } },
+    dependencies = "nvim-treesitter/nvim-treesitter-textobjects",
   },
 
   {
@@ -129,10 +122,18 @@ return {
   },
 
   {
+    "f3fora/cmp-spell",
+  },
+
+  {
+    "hrsh7th/cmp-nvim-lsp-document-symbol",
+  },
+
+  {
     "L3MON4D3/LuaSnip",
     version = "v2.*",
     build = "make install_jsregexp",
-    dependencies = { "rafamadriz/friendly-snippets" },
+    dependencies = "rafamadriz/friendly-snippets",
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
     end,
@@ -160,6 +161,7 @@ return {
 
   {
     "neovim/nvim-lspconfig",
+    dependencies = "hrsh7th/nvim-cmp",
     config = function()
       require "configs.lspconfig"
     end,
@@ -167,7 +169,7 @@ return {
 
   {
     "stevearc/conform.nvim",
-    opts = require "configs.conform",
+    opts = require "opts.conform",
   },
 
   {
@@ -175,15 +177,14 @@ return {
   },
 
   {
+    "lewis6991/gitsigns.nvim",
+    opts = {},
+  },
+
+  {
     "folke/lazydev.nvim",
     ft = "lua",
-    opts = {
-      library = {
-        -- See the configuration section for more details
-        -- Load luvit types when the `vim.uv` word is found
-        { path = "luvit-meta/library", words = { "vim%.uv" } },
-      },
-    },
+    opts = require "opts.lazydev",
   },
 
   {
@@ -191,7 +192,41 @@ return {
     lazy = true,
   }, -- optional `vim.uv` typings
 
+  {
+    "mfussenegger/nvim-dap",
+    config = function()
+      require "configs.dap"
+    end,
+  },
+
+  {
+    "nvim-telescope/telescope-dap.nvim",
+    dependencies = { "mfussenegger/nvim-dap", "nvim-telescope/telescope.nvim", "nvim-treesitter/nvim-treesitter" },
+    config = function()
+      require "configs.telescope-dap"
+    end,
+  },
+
+  {
+    "mfussenegger/nvim-dap-python",
+    dependencies = "mfussenegger/nvim-dap",
+    ft = "python",
+    config = function()
+      require "configs.dap-python"
+    end,
+  },
+
+  {
+    "theHamsta/nvim-dap-virtual-text",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    opts = require "opts.dap-virtual-text",
+  },
+
   -- Ascension.
+  {
+    "nvim-tree/nvim-web-devicons",
+  },
+
   {
     "folke/zen-mode.nvim",
     opts = {},

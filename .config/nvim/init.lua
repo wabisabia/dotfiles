@@ -25,12 +25,3 @@ vim.schedule(function()
 end)
 
 require "options"
-
-local open_with_trouble = require("trouble.sources.telescope").open
-require("telescope").setup {
-  defaults = {
-    mappings = {
-      n = { ["<leader>t"] = open_with_trouble },
-    },
-  },
-}

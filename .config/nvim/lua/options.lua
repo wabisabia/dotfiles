@@ -6,6 +6,7 @@ o.colorcolumn = "120"
 o.scrolloff = 20
 o.splitbelow = true
 o.splitright = true
+o.wrap = false
 
 o.laststatus = 3
 o.showmode = false
@@ -28,6 +29,7 @@ o.mouse = "a"
 
 -- Numbers
 o.relativenumber = true
+o.number = true
 o.numberwidth = 2
 
 -- disable nvim intro

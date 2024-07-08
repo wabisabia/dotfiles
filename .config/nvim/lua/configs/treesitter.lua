@@ -1,7 +1,13 @@
 local configs = require "nvim-treesitter.configs"
 
 configs.setup {
+  sync_install = false,
+
+  ignore_install = {},
+
   ensure_installed = { "lua", "luadoc", "printf", "vim", "vimdoc" },
+
+  auto_install = false,
 
   highlight = {
     enable = true,
@@ -44,4 +50,6 @@ configs.setup {
       },
     },
   },
+
+  modules = {},
 }
