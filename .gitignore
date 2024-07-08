@@ -1,6 +1,7 @@
 *
 !.gitignore
 !.ignore
+!.config
 !.config/*
 !README.md
 
