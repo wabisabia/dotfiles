@@ -2,7 +2,7 @@
 !.gitignore
 !.ignore
 !.config
-!.config/*
+!.config/**
 !README.md
 
 # Security
