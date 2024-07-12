@@ -63,6 +63,12 @@ return {
   },
 
   {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {},
+  },
+
+  {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     config = true,
