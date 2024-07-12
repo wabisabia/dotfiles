@@ -98,13 +98,15 @@ lspconfig.pyright.setup {
 
 lspconfig.jedi_language_server.setup {
   capabilities = capabilities,
-  ---@param client vim.lsp.Client
-  ---@param bufnr integer
+  ---@type fun(client:vim.lsp.Client, bufnr:integer)
   on_attach = function(client, bufnr)
     -- pyright does these better / faster
     client.server_capabilities.referencesProvider = nil
     client.server_capabilities.definitionProvider = nil
     client.server_capabilities.renameProvider = nil
+    -- XXX: jedi_language_server hovers are better syntax-highlighted, configure to preference
+    client.server_capabilities.hoverProvider = nil
+    -- XXX: pyright provides less granular symbols, configure to preference
     client.server_capabilities.documentSymbolProvider = nil
     on_attach(client, bufnr)
   end,
