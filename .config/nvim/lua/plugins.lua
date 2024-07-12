@@ -175,6 +175,9 @@ return {
   {
     "stevearc/conform.nvim",
     opts = require "opts.conform",
+    config = function()
+      require "configs.conform"
+    end,
   },
 
   {
