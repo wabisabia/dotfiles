@@ -4,6 +4,7 @@ local servers = {
   "dockerls",
   -- "fish_lsp",
   -- "jsonls",
+  "lua_ls",
   "marksman",
   "rust_analyzer",
   "taplo",
@@ -67,11 +68,6 @@ for _, lsp in ipairs(servers) do
     on_attach = on_attach,
   }
 end
-
-lspconfig.lua_ls.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
 
 lspconfig.ruff.setup {
   capabilities = capabilities,
