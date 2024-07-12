@@ -52,6 +52,15 @@ local cmp_lsp = require "cmp_nvim_lsp"
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument = cmp_lsp.default_capabilities().textDocument
 
+vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
+vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
+
+local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     capabilities = capabilities,
