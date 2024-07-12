@@ -3,7 +3,7 @@ local lspconfig = require "lspconfig"
 local servers = {
   "dockerls",
   -- "fish_lsp",
-  "jsonls",
+  -- "jsonls",
   "marksman",
   "rust_analyzer",
   "taplo",

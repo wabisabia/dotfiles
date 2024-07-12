@@ -3,7 +3,7 @@ local o = vim.o
 local g = vim.g
 
 o.colorcolumn = "120"
-o.scrolloff = 20
+o.scrolloff = 15
 o.splitbelow = true
 o.splitright = true
 o.wrap = false
