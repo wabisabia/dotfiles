@@ -3,7 +3,7 @@ local conform = require "conform"
 conform.setup(require "opts.conform")
 
 vim.keymap.set("n", "<leader>fm", function()
-  conform.format(nil, function(err, did_edit)
+  conform.format({ lsp_format = "first" }, function(err, did_edit)
     local msg
     local level
     if err == nil then
