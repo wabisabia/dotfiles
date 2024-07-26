@@ -2,13 +2,15 @@
 
 This repository contains configuration for:
 
-|Program                                                          |Purpose             |Configuration          |
-|---                                                              |---                 |---                    |
-|[`fish`](https://fishshell.com/)                                 |shell               |`.config/fish`         |
-|[`starship`](https://starship.rs/installing/)                    |shell prompt        |`.config/starship.toml`|
-|[`nvim`](https://github.com/neovim/neovim/blob/master/INSTALL.md)|modal text-editor   |`.config/nvim`         |
-|[`tmux`](https://github.com/tmux/tmux/wiki/Installing)           |terminal multiplexer|`.tmux.conf`           |
-|[`git`](https://git-scm.com/downloads)                           |`git` client        |`.gitconfig`           |
+|Program                                                              |Purpose              |Configuration          |
+|---                                                                  |---                  |---                    |
+|[`fish`](https://fishshell.com/)                                     |shell                |`.config/fish`         |
+|[`starship`](https://starship.rs/installing/)                        |shell prompt         |`.config/starship.toml`|
+|[`nvim`](https://github.com/neovim/neovim/blob/master/INSTALL.md)    |modal text-editor    |`.config/nvim`         |
+|[`tmux`](https://github.com/tmux/tmux/wiki/Installing)               |terminal multiplexer |`.tmux.conf`           |
+|[`git`](https://git-scm.com/downloads)                               |`git` client         |`.gitconfig`           |
+|[`yabai`](https://github.com/koekeishiya/yabai/wiki#quickstart-guide)|tiling window manager|`.config/yabai/yabairc`|
+|[`skhd`](https://github.com/koekeishiya/skhd)                        |hotkey daemon        |`.config/skhd/skhdrc`  |
 
 Some configuration relies on:
 
