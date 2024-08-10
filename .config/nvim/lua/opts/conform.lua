@@ -1,37 +1,20 @@
+--- require "conform"
+
 return {
   formatters_by_ft = {
     lua = { "stylua" },
     python = { "ruff_format", "ruff_organize_imports" },
     json = { "jsonformat" },
+    yaml = { "yamlfmt" },
   },
 
+  ---@type table<string, conform.FormatterConfigOverride>
   formatters = {
     ruff_format = {
-      args = {
-        "format",
-        "--force-exclude",
-        "--stdin-filename",
-        "$FILENAME",
-        "--line-length",
-        "120",
-        "-",
-      },
+      append_args = { "--line-length", "120" },
     },
     ruff_organize_imports = {
-      args = {
-        "check",
-        "--fix",
-        "--force-exclude",
-        "--select",
-        "I001",
-        "--exit-zero",
-        "--no-cache",
-        "--stdin-filename",
-        "$FILENAME",
-        "--line-length",
-        "120",
-        "-",
-      },
+      append_args = { "--line-length", "120" },
     },
     jsonformat = {
       command = "jsonformat",
