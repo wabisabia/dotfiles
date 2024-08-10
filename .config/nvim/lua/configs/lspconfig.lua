@@ -22,8 +22,9 @@ local on_attach = function(_, bufnr)
 
   local map = vim.keymap.set
 
-  map("n", "gd", "<cmd>Trouble close<cr><cmd>Trouble lsp_definitions first<cr>", opts "definitions in project")
+  map("n", "gd", vim.lsp.buf.definition, opts "definitions in project")
   map("n", "gr", "<cmd>Trouble close<cr><cmd>Trouble lsp_references first<cr>", opts "references in project")
+  map("n", "gR", "<cmd>Trouble close<cr><cmd>Trouble lsp_references_buffer first<cr>", opts "references in project")
   map("n", "gD", vim.lsp.buf.declaration, opts "Go to declaration")
   map("n", "gi", vim.lsp.buf.implementation, opts "Go to implementation")
   map("n", "<leader>sh", vim.lsp.buf.signature_help, opts "Show signature help")
