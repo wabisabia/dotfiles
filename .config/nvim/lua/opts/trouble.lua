@@ -9,5 +9,11 @@ return {
     lsp_definitions = {
       auto_jump = false,
     },
+    lsp_references_buffer = {
+      mode = "lsp_references",
+      filter = {
+        buf = 0,
+      },
+    },
   },
 }
