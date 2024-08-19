@@ -107,20 +107,20 @@
 
 
 # Window stuff
-alt - h : yabai -m window --focus west
-alt - j : yabai -m window --focus south
-alt - k : yabai -m window --focus north
-alt - l : yabai -m window --focus east
+alt - h : ~/.config/skhd/go-left.fish
+alt - j : ~/.config/skhd/go-down.fish
+alt - k : ~/.config/skhd/go-up.fish
+alt - l : ~/.config/skhd/go-right.fish
 
-alt + shift - h : yabai -m window --swap west
-alt + shift - j : yabai -m window --swap south
-alt + shift - k : yabai -m window --swap north
-alt + shift - l : yabai -m window --swap east
+alt + cmd - h : yabai -m window --swap west
+alt + cmd - j : ~/.config/skhd/move-down.fish
+alt + cmd - k : ~/.config/skhd/move-up.fish
+alt + cmd - l : yabai -m window --swap east
 
-alt + cmd - h : yabai -m window --resize left:-100:0
-alt + cmd - j : yabai -m window --resize bottom:0:100
-alt + cmd - k : yabai -m window --resize top:0:-100
-alt + cmd - l : yabai -m window --resize right:100:0
+cmd + shift - h : yabai -m window --resize right:-100:0
+cmd + shift - j : yabai -m window --resize bottom:0:100
+cmd + shift - k : yabai -m window --resize top:0:-100
+cmd + shift - l : yabai -m window --resize right:100:0
 
 alt + cmd + shift - h : yabai -m window --warp west
 alt + cmd + shift - j : yabai -m window --warp south
@@ -128,14 +128,12 @@ alt + cmd + shift - k : yabai -m window --warp north
 alt + cmd + shift - l : yabai -m window --warp east
 
 alt - f : yabai -m window --toggle zoom-fullscreen
-alt - b : yabai -m space --balance
+# The keycode for "=" is on my Keychron K3
+alt - 0x18 : yabai -m space --balance
 alt - z : yabai -m space --toggle padding
 alt - r : yabai -m space --rotate 270
 
-# Display stuff
 alt - space : yabai -m display --focus recent
-alt - u : yabai -m display --focus 1
-alt - d : yabai -m display --focus 2
 
-alt + shift - u : yabai -m window --space 1
-alt + shift - d : yabai -m window --space 2
+alt - n : ~/.config/skhd/go-next-space.fish
+alt - p : ~/.config/skhd/go-prev-space.fish
