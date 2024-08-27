@@ -242,6 +242,14 @@ return {
 
   -- Ascension.
   {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    config = function()
+      require "configs.toggleterm"
+    end,
+  },
+
+  {
     "nvim-tree/nvim-web-devicons",
   },
 
