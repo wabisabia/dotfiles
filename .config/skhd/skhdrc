@@ -106,16 +106,15 @@
 # ]
 
 
-# Window stuff
-alt - h : ~/.config/skhd/go-left.fish
-alt - j : ~/.config/skhd/go-down.fish
-alt - k : ~/.config/skhd/go-up.fish
-alt - l : ~/.config/skhd/go-right.fish
+alt - h : ~/.config/skhd/go-west.fish
+alt - j : ~/.config/skhd/go-south.fish
+alt - k : ~/.config/skhd/go-north.fish
+alt - l : ~/.config/skhd/go-east.fish
 
-alt + cmd - h : yabai -m window --swap west
-alt + cmd - j : ~/.config/skhd/move-down.fish
-alt + cmd - k : ~/.config/skhd/move-up.fish
-alt + cmd - l : yabai -m window --swap east
+alt + cmd - h : ~/.config/skhd/move-west.fish
+alt + cmd - j : ~/.config/skhd/move-south.fish
+alt + cmd - k : ~/.config/skhd/move-north.fish
+alt + cmd - l : ~/.config/skhd/move-east.fish
 
 cmd + shift - h : yabai -m window --resize right:-100:0
 cmd + shift - j : yabai -m window --resize bottom:0:100
@@ -128,12 +127,15 @@ alt + cmd + shift - k : yabai -m window --warp north
 alt + cmd + shift - l : yabai -m window --warp east
 
 alt - f : yabai -m window --toggle zoom-fullscreen
-# The keycode for "=" is on my Keychron K3
-alt - 0x18 : yabai -m space --balance
+alt + cmd - f : yabai -m window --toggle native-fullscreen
+
+alt - d : yabai -m display --focus recent
+alt - s : yabai -m space --focus recent
+alt - w : yabai -m window --focus recent
+
+alt + shift - s : ~/.config/skhd/create-space.fish
+alt + cmd + shift - s : ~/.config/skhd/destroy-space.fish
+
+alt - 0x18 : yabai -m space --balance # The keycode for "=" is on my MB and Keychron K3
 alt - z : yabai -m space --toggle padding
 alt - r : yabai -m space --rotate 270
-
-alt - space : yabai -m display --focus recent
-
-alt - n : ~/.config/skhd/go-next-space.fish
-alt - p : ~/.config/skhd/go-prev-space.fish
