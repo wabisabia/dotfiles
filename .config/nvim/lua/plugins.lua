@@ -54,6 +54,13 @@ return {
 
   -- We can edit text
   {
+    "xiyaowong/telescope-emoji.nvim",
+    config = function()
+      require("telescope").load_extension("emoji")
+    end
+  },
+
+  {
     "kylechui/nvim-surround",
     version = "*",
     event = "VeryLazy",
