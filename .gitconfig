@@ -1,0 +1,21 @@
+[alias]
+  a = add
+  b = branch
+  bp = remote update origin --prune
+  bu = branch --set-upstream-to
+  c = commit
+  cm = commit -m
+  ca = commit --amend
+  d = diff
+  D = diff --staged
+  f = fetch
+  l = log
+  ln = log -n
+  pl = pull
+  ps = push
+  r = restore
+  R = restore --staged
+  s = status
+  wa = worktree add
+  wl = worktree list
+  wr = worktree remove
