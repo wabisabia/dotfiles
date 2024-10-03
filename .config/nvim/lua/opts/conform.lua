@@ -2,9 +2,9 @@
 
 return {
   formatters_by_ft = {
+    json = { "jsonformat" },
     lua = { "stylua" },
     python = { "ruff_format", "ruff_organize_imports" },
-    json = { "jsonformat" },
     yaml = { "yamlfmt" },
     zig = { "zigfmt" },
   },
