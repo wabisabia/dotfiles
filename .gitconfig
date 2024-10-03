@@ -7,14 +7,14 @@
   cm = commit -m
   ca = commit --amend
   d = diff
-  D = diff --staged
+  ds = diff --staged
   f = fetch
   l = log
   ln = log -n
   pl = pull
   ps = push
   r = restore
-  R = restore --staged
+  rs = restore --staged
   s = status
   wa = worktree add
   wl = worktree list
