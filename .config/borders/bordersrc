@@ -4,4 +4,4 @@ borders                   \
   style=round             \
   active_color=0xffde4393 \
   width=5.0               \
-  hidpi=true
+  hidpi=on
