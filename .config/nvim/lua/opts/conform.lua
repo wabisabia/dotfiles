@@ -6,6 +6,7 @@ return {
     python = { "ruff_format", "ruff_organize_imports" },
     json = { "jsonformat" },
     yaml = { "yamlfmt" },
+    zig = { "zigfmt" },
   },
 
   ---@type table<string, conform.FormatterConfigOverride>

@@ -11,6 +11,7 @@ local servers = {
   "terraformls",
   "tsserver",
   "yamlls",
+  "zls",
 }
 
 ---@type fun(client:vim.lsp.Client, bufnr:integer)
