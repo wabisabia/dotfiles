@@ -135,3 +135,16 @@ lspconfig.jedi_language_server.setup {
     on_attach(client, bufnr)
   end,
 }
+
+lspconfig.yamlls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    yaml = {
+      format = {
+        proseWrap = "Always",
+        printWidth = 120,
+      },
+    },
+  },
+}
