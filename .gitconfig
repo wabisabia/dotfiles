@@ -1,3 +1,21 @@
+[core]
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true
+  dark = false
+  line-numbers = true
+  features = gruvbox-dark
+
+[merge]
+  conflictstyle = diff3
+
+[diff]
+  colorMoved = default
+
 [alias]
   a = add
   b = branch
