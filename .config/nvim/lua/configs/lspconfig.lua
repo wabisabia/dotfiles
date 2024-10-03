@@ -1,5 +1,6 @@
 local lspconfig = require "lspconfig"
 
+---@type string[]
 local servers = {
   "dockerls",
   -- "fish_lsp",
@@ -9,7 +10,7 @@ local servers = {
   "rust_analyzer",
   "taplo",
   "terraformls",
-  "tsserver",
+  "ts_ls",
   "yamlls",
   "zls",
 }
