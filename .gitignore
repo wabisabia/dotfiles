@@ -6,3 +6,4 @@
 !.ignore
 !.tmux.conf
 !.gitconfig
+.config/fish/completions/
