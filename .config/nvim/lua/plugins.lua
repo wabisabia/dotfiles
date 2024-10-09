@@ -45,6 +45,11 @@ return {
   },
 
   {
+    "stevearc/dressing.nvim",
+    opts = {},
+  },
+
+  {
     "rcarriga/nvim-notify",
     opts = require "opts.notify",
     init = function()
@@ -56,8 +61,8 @@ return {
   {
     "xiyaowong/telescope-emoji.nvim",
     config = function()
-      require("telescope").load_extension("emoji")
-    end
+      require("telescope").load_extension "emoji"
+    end,
   },
 
   {
