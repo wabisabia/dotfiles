@@ -1,9 +1,5 @@
 local map = vim.keymap.set
 
--- Close
-map("n", "<leader>x", "<cmd>bd<cr>", { desc = "close buffer" })
-map("n", "<leader>X", "<cmd>bd!<cr>", { desc = "close buffer (forcibly)" })
-
 -- Search
 map("n", "/", "/\\v", { desc = "search regex" })
 

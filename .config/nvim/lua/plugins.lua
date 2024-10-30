@@ -11,6 +11,13 @@ return {
   },
 
   {
+    "famiu/bufdelete.nvim",
+    config = function()
+      require "configs.bufdelete"
+    end,
+  },
+
+  {
     "nvim-tree/nvim-tree.lua",
     version = "*",
     dependencies = "nvim-tree/nvim-web-devicons",
