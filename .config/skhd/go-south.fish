@@ -6,4 +6,4 @@ function go_to_southern_display
   yabai -m display --focus (math "$display_idx + 1")
 end
 
-yabai -m window --focus south; or go_to_southern_display
+yabai -m window --focus south 2>/dev/null; or go_to_southern_display

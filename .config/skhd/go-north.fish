@@ -6,4 +6,4 @@ function move_to_northern_display
   yabai -m display --focus (math "$display_idx - 1"); or yabai -m display --focus 1
 end
 
-yabai -m window --focus north; or move_to_northern_display
+yabai -m window --focus north 2>/dev/null; or move_to_northern_display
