@@ -32,11 +32,17 @@ local on_attach = function(_, bufnr)
   map("n", "<leader>sh", vim.lsp.buf.signature_help, opts "Show signature help")
   map("n", "<leader>rn", function()
     vim.ui.input({ prompt = "Rename to: " }, function(input)
+      if input == nil then
+        return
+      end
       vim.lsp.buf.rename(input)
     end)
   end, opts "Rename")
   map("n", "<leader>rw", function()
     vim.ui.input({ prompt = "Reword to: ", default = vim.fn.expand "<cword>" }, function(input)
+      if input == nil then
+        return
+      end
       vim.lsp.buf.rename(input)
     end)
   end, opts "Reword")
