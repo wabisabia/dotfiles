@@ -2,7 +2,7 @@ local conform = require "conform"
 
 conform.setup(require "opts.conform")
 
-vim.keymap.set("n", "<leader>fm", function()
+vim.keymap.set("n", "<leader>af", function()
   conform.format({ lsp_format = "first" }, function(err, did_edit)
     local msg
     local level
