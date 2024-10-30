@@ -66,6 +66,10 @@ return {
 
   -- We can edit text
   {
+    "tpope/vim-abolish",
+  },
+
+  {
     "xiyaowong/telescope-emoji.nvim",
     config = function()
       require("telescope").load_extension "emoji"
