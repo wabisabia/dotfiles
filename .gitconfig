@@ -34,6 +34,8 @@
   r = restore
   rs = restore --staged
   s = status
+  sw = switch
+  w = worktree
   wa = worktree add
   wl = worktree list
   wr = worktree remove
