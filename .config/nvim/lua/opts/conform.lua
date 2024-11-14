@@ -5,6 +5,7 @@ return {
     json = { "jsonformat" },
     lua = { "stylua" },
     python = { "ruff_format", "ruff_organize_imports" },
+    sh = { "shfmt" },
     yaml = { "yamlfmt" },
     zig = { "zigfmt" },
   },
