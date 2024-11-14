@@ -31,7 +31,6 @@ local on_attach = function(_, bufnr)
   map("n", "gR", "<cmd>Trouble close<cr><cmd>Trouble lsp_references_buffer first<cr>", opts "references in project")
   map("n", "gD", vim.lsp.buf.declaration, opts "Go to declaration")
   map("n", "gi", vim.lsp.buf.implementation, opts "Go to implementation")
-  map("n", "<leader>sh", vim.lsp.buf.signature_help, opts "Show signature help")
   map("n", "<leader>rn", function()
     vim.ui.input({ prompt = "Rename to: " }, function(input)
       if input == nil then
@@ -55,7 +54,6 @@ local on_attach = function(_, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, opts "List workspace folders")
 
-  map("n", "<leader>D", vim.lsp.buf.type_definition, opts "Go to type definition")
 
   map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts "Code action")
 end
