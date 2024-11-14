@@ -26,36 +26,31 @@ local on_attach = function(_, bufnr)
 
   local map = vim.keymap.set
 
+  -- Navigation
   map("n", "gd", vim.lsp.buf.definition, opts "definitions in project")
-  map("n", "gr", "<cmd>Trouble close<cr><cmd>Trouble lsp_references first<cr>", opts "references in project")
-  map("n", "gR", "<cmd>Trouble close<cr><cmd>Trouble lsp_references_buffer first<cr>", opts "references in project")
   map("n", "gD", vim.lsp.buf.declaration, opts "Go to declaration")
   map("n", "gi", vim.lsp.buf.implementation, opts "Go to implementation")
-  map("n", "<leader>rn", function()
-    vim.ui.input({ prompt = "Rename to: " }, function(input)
-      if input == nil then
-        return
-      end
-      vim.lsp.buf.rename(input)
-    end)
-  end, opts "Rename")
-  map("n", "<leader>rw", function()
-    vim.ui.input({ prompt = "Reword to: ", default = vim.fn.expand "<cword>" }, function(input)
-      if input == nil then
-        return
-      end
-      vim.lsp.buf.rename(input)
-    end)
-  end, opts "Reword")
-  map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts "Add workspace folder")
-  map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts "Remove workspace folder")
+  map("n", "gr", "<cmd>Trouble close<cr><cmd>Trouble lsp_references first<cr>", opts "references in project")
+  map("n", "gR", "<cmd>Trouble close<cr><cmd>Trouble lsp_references_buffer first<cr>", opts "references in buffer")
 
-  map("n", "<leader>wl", function()
+  -- Rename/reword
+  map("n", "<leader>cn", function()
+    util.input(vim.lsp.buf.rename, { prompt = "Rename: " })
+  end, opts "Rename")
+  map("n", "<leader>an", function()
+    util.input(vim.lsp.buf.rename, { prompt = "Reword: ", default = vim.fn.expand "<cword>" })
+  end, opts "Reword")
+
+  -- Workspace operations
+  map("n", "<leader>aw", function()
+    util.input(vim.lsp.buf.add_workspace_folder, { prompt = "New workspace folder: " })
+  end, opts "Add workspace folder")
+  map("n", "<leader>dw", vim.lsp.buf.remove_workspace_folder, opts "Remove workspace folder")
+  map("n", "<leader>w", function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, opts "List workspace folders")
 
-
-  map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts "Code action")
+  map({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, opts "Code action")
 end
 
 local cmp_lsp = require "cmp_nvim_lsp"
