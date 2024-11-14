@@ -1,7 +1,9 @@
 local lspconfig = require "lspconfig"
+local util = require "util"
 
 ---@type string[]
 local servers = {
+  "bashls",
   "dockerls",
   -- "fish_lsp",
   -- "jsonls",

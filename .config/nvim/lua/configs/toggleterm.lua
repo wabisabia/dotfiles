@@ -1,6 +1,7 @@
 local tt = require "toggleterm"
+local util = require "util"
 
-vim.keymap.set("t", "<C-t>", tt.toggle_all)
+util.map("t", "<C-t>", tt.toggle_all, "Toggle terminal")
 
 tt.setup {
   open_mapping = [[<c-t>]],

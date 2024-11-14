@@ -1,8 +1,9 @@
 local conform = require "conform"
+local util = require "util"
 
 conform.setup(require "opts.conform")
 
-vim.keymap.set("n", "<leader>af", function()
+util.map("n", "<leader>af", function()
   conform.format({ lsp_format = "first" }, function(err, did_edit)
     local msg
     local level
@@ -15,4 +16,4 @@ vim.keymap.set("n", "<leader>af", function()
     end
     vim.notify(msg, level)
   end)
-end, { desc = "Format buffer" })
+end, "format buffer")

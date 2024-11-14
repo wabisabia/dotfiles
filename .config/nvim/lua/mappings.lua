@@ -1,21 +1,22 @@
 local map = vim.keymap.set
+local util = require "util"
 
 -- Search
-map("n", "/", "/\\v", { desc = "search regex" })
+util.map("n", "/", "/\\v", "search regex")
 
 -- Move
-map("n", "<C-h>", "<C-w>h", { desc = "move left one window" })
-map("n", "<C-j>", "<C-w>j", { desc = "move up one window" })
-map("n", "<C-k>", "<C-w>k", { desc = "move down one window" })
-map("n", "<C-l>", "<C-w>l", { desc = "move right one window" })
+util.map("n", "<C-h>", "<C-w>h", "move left one window")
+util.map("n", "<C-j>", "<C-w>j", "move up one window")
+util.map("n", "<C-k>", "<C-w>k", "move down one window")
+util.map("n", "<C-l>", "<C-w>l", "move right one window")
 
 -- Goto
-map("n", "<leader>j", "<cmd>BufferLineCycleNext<cr>", { desc = "goto next buffer" })
-map("n", "<leader>k", "<cmd>BufferLineCyclePrev<cr>", { desc = "goto prev buffer" })
+util.map("n", "<leader>j", "<cmd>BufferLineCycleNext<cr>", "goto next buffer")
+util.map("n", "<leader>k", "<cmd>BufferLineCyclePrev<cr>", "goto prev buffer")
 
 -- Show
-map("n", "L", vim.diagnostic.open_float, { desc = "show diagnostics at cursor" })
-map("n", "<C-n>", "<cmd>NvimTreeToggle<cr>", { desc = "show file explorer" })
+util.map("n", "L", vim.diagnostic.open_float, "show diagnostics at cursor")
+util.map("n", "<C-n>", "<cmd>NvimTreeToggle<cr>", "show file explorer")
 
 -- List
 map("n", "<leader>tt", "<cmd>Trouble todo toggle filter.buf=0<cr>", { desc = "list todos in buffer" })
@@ -30,18 +31,18 @@ map("n", "<leader>tD", "<cmd>Trouble diagnostics toggle auto_close=1<cr>", { des
 map("n", "<leader>ts", "<cmd>Trouble symbols toggle<cr>", { desc = "list symbols in buffer" })
 
 -- Util
-map("t", "<C-x>", "<C-\\><C-n>", { desc = "escape terminal mode" })
+util.map("t", "<C-x>", "<C-\\><C-n>", "escape terminal mode")
 
 -- Ascend
 local zen = require "zen-mode"
 local twilight = require "twilight"
 
-map("n", "gz", function()
+util.map("n", "gz", function()
   zen.open()
   twilight.enable()
-end, { desc = "ascend" })
+end, "ascend")
 
-map("n", "gZ", function()
+util.map("n", "gZ", function()
   zen.close()
   twilight.disable()
-end, { desc = "descend" })
+end, "descend")

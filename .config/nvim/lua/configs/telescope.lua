@@ -13,13 +13,14 @@ telescope.setup {
 }
 
 local builtin = require "telescope.builtin"
+local util = require "util"
 
-vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "search normal mode keymaps" })
-vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "search files in workspace" })
-vim.keymap.set("n", "<leader>fg", builtin.git_files, { desc = "search git files in workspace" })
-vim.keymap.set("n", "<leader>fw", builtin.live_grep, { desc = "search in workspace" })
-vim.keymap.set("n", "<leader>fz", builtin.current_buffer_fuzzy_find, { desc = "search in buffer" })
-vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "search help tags" })
-vim.keymap.set("n", "<leader>fs", builtin.spell_suggest, { desc = "search spelling" })
-vim.keymap.set("n", "<leader>ft", builtin.lsp_workspace_symbols, { desc = "search workspace symbols" })
-vim.keymap.set("n", "<leader>fe", builtin.builtin, { desc = "search builtins" })
+util.map("n", "<leader>fk", builtin.keymaps, "search normal mode keymaps")
+util.map("n", "<leader>ff", builtin.find_files, "search files in workspace")
+util.map("n", "<leader>fg", builtin.git_files, "search git files in workspace")
+util.map("n", "<leader>fw", builtin.live_grep, "search in workspace")
+util.map("n", "<leader>fz", builtin.current_buffer_fuzzy_find, "search in buffer")
+util.map("n", "<leader>fh", builtin.help_tags, "search help tags")
+util.map("n", "<leader>fs", builtin.spell_suggest, "search spelling")
+util.map("n", "<leader>ft", builtin.lsp_workspace_symbols, "search workspace symbols")
+util.map("n", "<leader>fe", builtin.builtin, "search builtins")

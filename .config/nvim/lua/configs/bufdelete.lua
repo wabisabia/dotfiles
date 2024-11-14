@@ -1,9 +1,10 @@
 local bd = require "bufdelete"
+local util = require "util"
 
-vim.keymap.set("n", "<leader>x", function()
+util.map("n", "<leader>x", function()
   bd.bufdelete(0)
-end)
+end, "Delete buffer")
 
-vim.keymap.set("n", "<leader>X", function()
+util.map("n", "<leader>X", function()
   bd.bufdelete(0, true)
-end)
+end, "Force-delete buffer")

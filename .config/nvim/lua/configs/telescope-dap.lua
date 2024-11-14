@@ -1,8 +1,9 @@
 local ts_dap = require("telescope").extensions.dap
+local util = require "util"
 
 vim.api.nvim_create_autocmd("TermEnter", {
   callback = function()
-    vim.keymap.set("n", "<leader>fv", ts_dap.variables, { desc = "search variables (while debugging)" })
+    util.map("n", "<leader>fv", ts_dap.variables, "search variables (while debugging)")
   end,
 })
 
@@ -13,7 +14,7 @@ vim.api.nvim_create_autocmd("TermLeave", {
 })
 
 -- local function set_keymaps()
---   -- vim.keymap.set("n", "<leader>fv", ts_dap.variables, { desc = "search variables (while debugging)" })
+--   -- util.map("n", "<leader>fv", ts_dap.variables, "search variables (while debugging)")
 -- end
 --
 -- local function del_keymaps()
