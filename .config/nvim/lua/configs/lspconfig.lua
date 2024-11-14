@@ -116,6 +116,7 @@ lspconfig.pyright.setup {
     python = {
       analysis = {
         diagnosticMode = "workspace",
+        typeCheckingMode = "strict",
       },
     },
   },
