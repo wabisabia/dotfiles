@@ -244,6 +244,30 @@ return {
   }, -- optional `vim.uv` typings
 
   {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require "configs.neotest"
+    end,
+  },
+
+  {
+    "nvim-neotest/neotest-python",
+    dependencies = {
+      "nvim-neotest/neotest",
+    },
+    ft = "python",
+    config = function()
+      require "configs.neotest-python"
+    end,
+  },
+
+  {
     "mfussenegger/nvim-dap",
     config = function()
       require "configs.dap"
