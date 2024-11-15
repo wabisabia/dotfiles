@@ -18,15 +18,13 @@ util.map("n", "L", vim.diagnostic.open_float, "show diagnostics at cursor")
 util.map("n", "<C-n>", "<cmd>NvimTreeToggle<cr>", "show file explorer")
 
 -- List
-util.map("n", "<leader>lt", "<cmd>Trouble todo toggle filter.buf=0<cr>", "list todos in buffer")
-util.map("n", "<leader>lT", "<cmd>Trouble todo toggle<cr>", "list todos in workspace")
+util.map("n", "<leader>lt", "<cmd>Trouble todo toggle auto_jump=1 auto_close=1<cr>", "list todos")
 util.map(
   "n",
   "<leader>ld",
-  "<cmd>Trouble diagnostics toggle filter.buf=0 auto_close=1<cr>",
+  "<cmd>Trouble diagnostics toggle auto_jump=1 auto_close=1<cr>",
   "list diagnostics in buffer"
 )
-util.map("n", "<leader>lD", "<cmd>Trouble diagnostics toggle auto_close=1<cr>", "list diagnostics in workspace")
 util.map("n", "<leader>ls", "<cmd>Trouble symbols toggle<cr>", "list symbols in buffer")
 
 -- Util
