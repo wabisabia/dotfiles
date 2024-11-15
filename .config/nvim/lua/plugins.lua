@@ -52,6 +52,15 @@ return {
   },
 
   {
+    "folke/persistence.nvim",
+    event = "BufReadPre",
+    opts = {},
+    config = function()
+      require "configs.persistence"
+    end,
+  },
+
+  {
     "stevearc/dressing.nvim",
     opts = {},
   },
