@@ -104,6 +104,15 @@ lspconfig.ruff.setup {
   },
 }
 
+lspconfig.rust_analyzer.setup {
+  capabilities = capabilities,
+  ---@type fun(client: vim.lsp.Client, bufnr: integer)
+  on_attach = function(client, bufnr)
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+    on_attach(client, bufnr)
+  end,
+}
+
 lspconfig.pyright.setup {
   capabilities = capabilities,
   on_attach = on_attach,
