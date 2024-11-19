@@ -9,7 +9,6 @@ o.splitright = true
 o.wrap = false
 
 o.laststatus = 3
-o.showmode = false
 
 o.clipboard = "unnamedplus"
 o.cursorline = true
