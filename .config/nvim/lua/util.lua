@@ -1,8 +1,9 @@
 local M = {}
 
----@type fun(modes:string|string[], lhs:string, rhs:string|function, desc:string)
-M.map = function(mode, lhs, rhs, desc)
-  vim.keymap.set(mode, lhs, rhs, { desc = desc })
+---@type fun(modes:string|string[], lhs:string, rhs:string|function, desc:string, bufnr?:integer|boolean)
+---@param buffer? integer|boolean Creates buffer-local mapping, `0` or `true` for current buffer.
+M.map = function(mode, lhs, rhs, desc, buffer)
+  vim.keymap.set(mode, lhs, rhs, { desc = desc, buffer = buffer })
 end
 
 --- @class util.input.Opts
