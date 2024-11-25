@@ -11,6 +11,11 @@ return {
   },
 
   {
+    "stevearc/dressing.nvim",
+    opts = {},
+  },
+
+  {
     "akinsho/bufferline.nvim",
     version = "*",
     dependencies = "nvim-tree/nvim-web-devicons",
@@ -65,11 +70,6 @@ return {
     config = function()
       require "configs.persistence"
     end,
-  },
-
-  {
-    "stevearc/dressing.nvim",
-    opts = {},
   },
 
   {
@@ -286,6 +286,8 @@ return {
     lazy = true,
   }, -- optional `vim.uv` typings
 
+  -- Testing
+
   {
     "nvim-neotest/neotest",
     dependencies = {
@@ -299,6 +301,31 @@ return {
     end,
   },
 
+  -- Debugging via DAP
+
+  {
+    "mfussenegger/nvim-dap",
+    config = function()
+      require "configs.dap"
+    end,
+  },
+
+  {
+    "theHamsta/nvim-dap-virtual-text",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    opts = require "opts.dap-virtual-text",
+  },
+
+  {
+    "nvim-telescope/telescope-dap.nvim",
+    dependencies = { "mfussenegger/nvim-dap", "nvim-telescope/telescope.nvim", "nvim-treesitter/nvim-treesitter" },
+    config = function()
+      require "configs.telescope-dap"
+    end,
+  },
+
+  -- python
+
   {
     "nvim-neotest/neotest-python",
     dependencies = {
@@ -311,21 +338,6 @@ return {
   },
 
   {
-    "mfussenegger/nvim-dap",
-    config = function()
-      require "configs.dap"
-    end,
-  },
-
-  {
-    "nvim-telescope/telescope-dap.nvim",
-    dependencies = { "mfussenegger/nvim-dap", "nvim-telescope/telescope.nvim", "nvim-treesitter/nvim-treesitter" },
-    config = function()
-      require "configs.telescope-dap"
-    end,
-  },
-
-  {
     "mfussenegger/nvim-dap-python",
     dependencies = "mfussenegger/nvim-dap",
     ft = "python",
@@ -334,10 +346,15 @@ return {
     end,
   },
 
+  -- rust
+
   {
-    "theHamsta/nvim-dap-virtual-text",
-    dependencies = "nvim-treesitter/nvim-treesitter",
-    opts = require "opts.dap-virtual-text",
+    "mrcjkb/rustaceanvim",
+    version = "^5", -- Recommended
+    lazy = false, -- This plugin is already lazy
+    config = function()
+      require "configs.rust"
+    end,
   },
 
   -- Ascension.
