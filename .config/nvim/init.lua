@@ -1,4 +1,4 @@
-vim.cmd [[colorscheme retrobox]]
+vim.o.background = "dark"
 
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
@@ -17,7 +17,6 @@ local lazy_config = require "configs.lazy"
 -- load plugins
 require("lazy").setup({
   spec = { import = "plugins" },
-  install = { colorscheme = { "gruvbox" } },
 }, lazy_config)
 
 vim.schedule(function()
@@ -25,3 +24,5 @@ vim.schedule(function()
 end)
 
 require "options"
+
+vim.cmd([[colorscheme gruvbox]])

@@ -4,6 +4,13 @@ require "lazy"
 return {
   -- We don't know where we are...
   {
+    "ellisonleao/gruvbox.nvim",
+    priority = 1000,
+    config = true,
+    opts = {},
+  },
+
+  {
     "akinsho/bufferline.nvim",
     version = "*",
     dependencies = "nvim-tree/nvim-web-devicons",
