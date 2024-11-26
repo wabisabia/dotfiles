@@ -19,10 +19,10 @@ M.set_common_lsp_keymaps = function(bufnr)
 
   -- Rename/reword
   util.map("n", "<leader>rn", function()
-    util.input(vim.lsp.buf.rename, { prompt = "Rename: " })
+    util.input(vim.lsp.buf.rename, { prompt = "New name: " })
   end, "Rename", bufnr)
   util.map("n", "<leader>rw", function()
-    util.input(vim.lsp.buf.rename, { prompt = "Reword: ", default = vim.fn.expand "<cword>" })
+    util.input(vim.lsp.buf.rename, { prompt = "New name: ", default = vim.fn.expand "<cword>" })
   end, "Reword", bufnr)
 
   -- Workspace operations
