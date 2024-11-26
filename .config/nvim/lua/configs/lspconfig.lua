@@ -78,18 +78,20 @@ lspconfig.ruff.setup {
   },
 }
 
-lspconfig.pyright.setup {
+lspconfig.basedpyright.setup {
   capabilities = capabilities,
   on_attach = on_attach,
   settings = {
-    pyright = {
+    basedpyright = {
       -- Using Ruff's import organizer
       disableOrganizeImports = true,
-    },
-    python = {
       analysis = {
         diagnosticMode = "workspace",
-        typeCheckingMode = "strict",
+        diagnosticSeverityOverrides = {
+          reportAny = false,
+          reportExplicitAny = false,
+          reportUnusedCallResult = false,
+        },
       },
     },
   },
