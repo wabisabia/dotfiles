@@ -15,6 +15,7 @@
 
 [diff]
   colorMoved = default
+  external = difft
 
 [alias]
   a = add
