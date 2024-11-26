@@ -31,15 +31,6 @@ util.map("n", "<leader>ls", "<cmd>Trouble symbols toggle<cr>", "list symbols in 
 util.map("t", "<C-x>", "<C-\\><C-n>", "escape terminal mode")
 
 -- Ascend
-local zen = require "zen-mode"
-local twilight = require "twilight"
-
 util.map("n", "gz", function()
-  zen.open()
-  twilight.enable()
+  vim.cmd("ZenMode")
 end, "ascend")
-
-util.map("n", "gZ", function()
-  zen.close()
-  twilight.disable()
-end, "descend")
