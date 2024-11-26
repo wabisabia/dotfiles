@@ -37,3 +37,9 @@ end
 if functions -q fzf_configure_bindings
   fzf_configure_bindings --directory=\cf
 end
+
+if command -sq gh
+  function repo
+    gum input | xargs gh search repos | gum choose | cut -f 1 | xargs -I{} open http://github.com/{}
+  end
+end
