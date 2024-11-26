@@ -25,4 +25,4 @@ end)
 
 require "options"
 
-vim.cmd([[colorscheme gruvbox]])
+vim.cmd([[colorscheme kanagawa]])
