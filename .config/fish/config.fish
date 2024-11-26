@@ -22,6 +22,7 @@ if command -sq eza
 end
 
 if command -sq nvim 
+  set -gx EDITOR nvim
   alias e nvim
 end
 
