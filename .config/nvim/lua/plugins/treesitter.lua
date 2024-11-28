@@ -52,8 +52,8 @@ return {
           border = "none",
           floating_preview_opts = {},
           peek_definition_code = {
-            ["<leader>paf"] = "@function.outer",
-            ["<leader>pac"] = "@class.outer",
+            ["<leader>pf"] = "@function.outer",
+            ["<leader>pc"] = "@class.outer",
           },
         },
       },
