@@ -118,12 +118,12 @@ return {
     lspconfig.ruff.setup {
       capabilities = capabilities,
       on_attach = on_attach,
-      cmd_env = { RUFF_TRACE = "messages" },
       settings = {
         args = {
           "--line-length=120",
         },
       },
+      trace = "messages",
       init_options = {
         settings = {
           logLevel = "debug",
@@ -158,10 +158,6 @@ return {
         client.server_capabilities.referencesProvider = nil
         client.server_capabilities.definitionProvider = nil
         client.server_capabilities.renameProvider = nil
-        -- XXX: jedi_language_server hovers are better syntax-highlighted, configure to preference
-        client.server_capabilities.hoverProvider = nil
-        -- XXX: pyright provides less granular symbols, configure to preference
-        -- client.server_capabilities.documentSymbolProvider = nil
         on_attach(client, bufnr)
       end,
     }
