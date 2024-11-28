@@ -1,12 +1,3 @@
-*
-!.gitignore
-!.ignore
-!.tmux.conf
-!.gitconfig
-!.config
-!.config/**
-!README.md
-
 # Security
 fish/fish_variables
 

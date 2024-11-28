@@ -40,3 +40,7 @@
   wa = worktree add
   wl = worktree list
   wr = worktree remove
+
+[user]
+	email = christian.d@gardeniatech.com
+	name = Christian Dunn
