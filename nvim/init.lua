@@ -67,15 +67,16 @@ local lazy_cfg = {
   spec = {
     { import = "plugins" },
   },
-  install = { colorscheme = { "kanagawa" } },
-  -- automatically check for plugin updates
-  checker = { enabled = true },
+  install = { colorscheme = { "kanagawa-dragon" } },
+  ui = {
+    border = "rounded"
+  }
 }
 
 require("lazy").setup(lazy_cfg)
 
+vim.cmd.colorscheme("kanagawa-dragon")
+
 vim.schedule(function()
   require "mappings"
 end)
-
-vim.cmd([[colorscheme kanagawa]])
