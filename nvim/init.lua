@@ -32,7 +32,11 @@ opt.number = true
 
 opt.inccommand = "split"
 
+opt.termguicolors = true
+
 -- Opinion
+
+opt.wrap = false
 
 opt.colorcolumn = "120"
 
@@ -58,7 +62,8 @@ opt.timeoutlen = 400
 
 opt.more = false
 
-require("lazy").setup {
+---@type LazyConfig
+local lazy_cfg = {
   spec = {
     { import = "plugins" },
   },
@@ -69,6 +74,8 @@ require("lazy").setup {
     path = "~/dev/me/plugins"
   },
 }
+
+require("lazy").setup(lazy_cfg)
 
 vim.schedule(function()
   require "mappings"
