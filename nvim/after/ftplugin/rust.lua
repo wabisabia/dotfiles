@@ -9,11 +9,11 @@ lsp.set_common_lsp_keymaps(bufnr)
 
 util.map("n", "K", function()
   vim.cmd.RustLsp { "hover", "actions" }
-end, "list code actions", bufnr)
+end, "open hover float", bufnr)
 
 util.map("n", "L", function()
   vim.cmd.RustLsp { "renderDiagnostic", "current" }
-end, "list code actions", bufnr)
+end, "open diagnostic float", bufnr)
 
 util.map("n", "<leader>la", function()
   vim.cmd.RustLsp "codeAction"
