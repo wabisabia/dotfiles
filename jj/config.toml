@@ -1,5 +1,6 @@
 [user]
 name = "Christian Dunn"
+email = "chrisd@wabisabia.com"
 
 [ui]
 diff.tool = ["difft", "--color=always", "$left", "$right"]
