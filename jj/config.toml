@@ -1,0 +1,15 @@
+ [user]
+ name = "Christian Dunn"
+ 
+ [ui]
+ diff.tool = ["difft", "--color=always", "$left", "$right"]
+ default-command = "log"
+ diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
+ 
+ [git]
+ auto-local-bookmark = true
+ 
+ [aliases]
+ b = ["bookmark", "list"]
+ ba = ["bookmark", "list", "--all"]
+ d = ["diff"]

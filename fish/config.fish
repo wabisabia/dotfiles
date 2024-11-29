@@ -30,6 +30,10 @@ if command -sq git
   alias g git
 end
 
+if command -sq jj
+  set -gx JJ_CONFIG ~/.config/jj/config.toml
+end
+
 if command -sq terraform
   alias tf terraform
 end
