@@ -129,10 +129,6 @@ alt + cmd + shift - l : yabai -m window --warp east
 alt - f : yabai -m window --toggle zoom-fullscreen
 alt + cmd - f : yabai -m window --toggle native-fullscreen
 
-alt - d : yabai -m display --focus recent
-alt - s : yabai -m space --focus recent
-alt - w : yabai -m window --focus recent
-
 alt + shift - s : ~/.config/skhd/create-space.fish
 alt + cmd + shift - s : ~/.config/skhd/destroy-space.fish
 
