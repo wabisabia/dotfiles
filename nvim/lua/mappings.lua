@@ -3,12 +3,6 @@ local util = require "util"
 -- Search
 util.map("n", "/", "/\\v", "search regex")
 
--- Move
-util.map("n", "<C-h>", "<C-w>h", "move left one window")
-util.map("n", "<C-j>", "<C-w>j", "move up one window")
-util.map("n", "<C-k>", "<C-w>k", "move down one window")
-util.map("n", "<C-l>", "<C-w>l", "move right one window")
-
 -- Goto
 util.map("n", "<leader>j", "<cmd>BufferLineCycleNext<cr>", "goto next buffer")
 util.map("n", "<leader>k", "<cmd>BufferLineCyclePrev<cr>", "goto prev buffer")
