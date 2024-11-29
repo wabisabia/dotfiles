@@ -33,7 +33,7 @@ return {
     util.map("n", "<leader>fz", builtin.current_buffer_fuzzy_find, "search in buffer")
     util.map("n", "<leader>fh", builtin.help_tags, "search help tags")
     util.map("n", "<leader>fs", builtin.spell_suggest, "search spelling")
-    util.map("n", "<leader>ft", builtin.lsp_workspace_symbols, "search workspace symbols")
+    util.map("n", "<leader>ft", builtin.lsp_dynamic_workspace_symbols, "search workspace symbols")
     util.map("n", "<leader>fe", builtin.builtin, "search builtins")
   end,
 }
