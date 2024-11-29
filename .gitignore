@@ -5,6 +5,7 @@ fish/fish_variables
 fish/completions/
 fish/functions/
 fish/conf.d/
+tmux/plugins/
 
 # Created by iTerm2
 iterm2/
