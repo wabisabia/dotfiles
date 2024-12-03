@@ -1,14 +1,52 @@
+"$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
+
 [user]
 name = "Christian Dunn"
 email = "chrisd@wabisabia.com"
 
-[ui]
-diff.tool = ["difft", "--color=always", "$left", "$right"]
-default-command = "log"
-diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
-
 [git]
 auto-local-bookmark = true
+private-commits = "description(glob:'wip:*') | description(glob:'private:*')"
+
+[template-aliases]
+"format_short_id(id)" = "id.shortest()"
+"format_timestamp(timestamp)" = "timestamp.ago()"
+"format_short_signature(signature)" = "signature.email().local()"
+
+[revset-aliases]
+"branch()" = "fork_point(@ | trunk())..@"
+"branch(x)" = "fork_point(bookmarks(x) | trunk())..bookmarks(x)"
+"me" = "fork_point(mine() & mutable())::"
+
+[revsets]
+log = "all()"
+
+[ui]
+default-command = "log"
+diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
+diff.tool = ["difft", "--color=always", "$left", "$right"]
+merge-editor = "diffconflicts"
 
 [aliases]
 d = ["diff"]
+pull = ["git", "fetch"]
+push = ["git", "push"]
+bu = [
+  "util",
+  "exec",
+  "--",
+  "bash",
+  "-c",
+  "jj bookmark move --to @ $(jj log --no-graph -T 'bookmarks.map(|bm| bm.name())' -r 'latest(bookmarks() & ..@)')",
+]
+
+[merge-tools.diffconflicts]
+program = "nvim"
+merge-args = [
+  "-c",
+  "let g:jj_diffconflicts_marker_length=$marker_length",
+  "-c",
+  "JJDiffConflicts",
+  "$output",
+]
+merge-tool-edits-conflict-markers = true
