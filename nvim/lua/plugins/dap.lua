@@ -2,6 +2,7 @@
 ---@type LazyPluginSpec
 return {
   "mfussenegger/nvim-dap",
+  version = "*",
   config = function()
     ---@type vim.fn.sign_define.dict
     local bp_opts = { text = "󰼅" }

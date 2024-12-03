@@ -2,6 +2,7 @@
 ---@type LazyPluginSpec
 return {
   "stevearc/conform.nvim",
+  version = "*",
   config = function()
     local conform = require "conform"
     local util = require "util"

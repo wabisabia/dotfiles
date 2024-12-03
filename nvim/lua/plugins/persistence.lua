@@ -2,6 +2,7 @@
 ---@type LazyPluginSpec
 return {
   "folke/persistence.nvim",
+  version = "*",
   event = "BufReadPre",
   config = function()
     local persistence = require "persistence"

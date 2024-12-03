@@ -2,6 +2,7 @@
 ---@type LazyPluginSpec
 return {
   "neovim/nvim-lspconfig",
+  version = "*",
   dependencies = "hrsh7th/nvim-cmp",
   config = function()
     local lspconfig = require "lspconfig"

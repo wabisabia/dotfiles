@@ -1,7 +1,7 @@
 ---require("lazy")
 ---@type LazyPluginSpec
 return {
-  "lewis6991/gitsigns.nvim",
+  "echasnovski/mini.align",
   version = "*",
   opts = {},
 }

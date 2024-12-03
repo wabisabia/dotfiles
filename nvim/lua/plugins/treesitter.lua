@@ -2,6 +2,7 @@
 ---@type LazyPluginSpec
 return {
   "nvim-treesitter/nvim-treesitter",
+  version = "*",
   dependencies = "nvim-treesitter/nvim-treesitter-textobjects",
   build = ":TSUpdate",
   config = function()

@@ -1,7 +1,8 @@
 ---require("lazy")
 ---@type LazyPluginSpec
 return {
-  "lewis6991/gitsigns.nvim",
+  "folke/zen-mode.nvim",
   version = "*",
+  cmd = "ZenMode",
   opts = {},
 }
