@@ -1,3 +1,6 @@
+# MacOS-isms
+**/.DS_Store
+
 # Security
 fish/fish_variables
 
@@ -6,9 +9,6 @@ fish/completions/
 fish/functions/
 fish/conf.d/
 tmux/plugins/
-
-# Created by iTerm2
-iterm2/
 
 # No version constraints needed
 lazy-lock.json
