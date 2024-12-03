@@ -70,9 +70,6 @@ local lazy_cfg = {
   install = { colorscheme = { "kanagawa" } },
   -- automatically check for plugin updates
   checker = { enabled = true },
-  dev = {
-    path = "~/dev/me/plugins"
-  },
 }
 
 require("lazy").setup(lazy_cfg)
