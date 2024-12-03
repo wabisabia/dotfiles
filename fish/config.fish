@@ -31,6 +31,7 @@ end
 if command -sq jj
   alias j 'jj'
   alias ja 'jj absorb'
+  alias jc 'jj commit'
   alias jd 'jj diff'
   alias je 'jj edit'
   alias jl 'jj log'
