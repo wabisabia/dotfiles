@@ -5,7 +5,6 @@ name = "Christian Dunn"
 email = "chrisd@wabisabia.com"
 
 [git]
-auto-local-bookmark = true
 private-commits = "description(glob:'wip:*') | description(glob:'private:*')"
 
 [template-aliases]
