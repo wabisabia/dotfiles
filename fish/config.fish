@@ -4,6 +4,10 @@ end
 
 set fish_greeting
 
+if not set -q TMUX
+  if not tmux a
+    tmux
+  end
 end
 
 fish_vi_key_bindings
@@ -31,4 +35,3 @@ end
 if functions -q fzf_configure_bindings
   fzf_configure_bindings --directory=\cf
 end
-
