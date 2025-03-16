@@ -2,7 +2,7 @@ if not status is-interactive
   return
 end
 
-fish_vi_key_bindings
+set fish_greeting
 
 if test (uname) = "Darwin"
   set -gx HOMEBREW_PREFIX "/opt/homebrew";
@@ -12,6 +12,8 @@ if test (uname) = "Darwin"
   ! set -q MANPATH; and set MANPATH ''; set -gx MANPATH "/opt/homebrew/share/man" $MANPATH;
   ! set -q INFOPATH; and set INFOPATH ''; set -gx INFOPATH "/opt/homebrew/share/info" $INFOPATH;
 end
+
+fish_vi_key_bindings
 
 if command -sq starship
   starship init fish | source
