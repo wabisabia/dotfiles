@@ -5,12 +5,13 @@ M = {}
 ---@type fun(bufnr: integer)
 M.set_common_lsp_keymaps = function(bufnr)
   local fzf = require("fzf-lua")
+
   -- Navigation
   util.map("n", "gd", vim.lsp.buf.definition, "Go to definition", bufnr)
   util.map("n", "gD", vim.lsp.buf.declaration, "Go to declaration", bufnr)
   util.map("n", "gi", vim.lsp.buf.implementation, "Go to implementation", bufnr)
   util.map("n", "gr", fzf.lsp_references, "Go to references", bufnr)
-  util.map("n", "gt", fzf.lsp_live_workspace_symbols, "Go to symbol", bufnr)
+  util.map("n", "<leader>s", fzf.lsp_live_workspace_symbols, "Go to symbol", bufnr)
   util.map("n", "ge", fzf.diagnostics_document, "Go to document diagnostic", bufnr)
   util.map("n", "g<c-e>", fzf.diagnostics_workspace, "Go to workspace diagnostic", bufnr)
 
