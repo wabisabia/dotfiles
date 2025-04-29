@@ -36,11 +36,18 @@ M.input = function(cmd, opts)
   end)
 end
 
----@type fun(cmd:string|string[]):nil
-M.run_in_split = function(cmd)
+---@type fun(cmd:string|string[], title:string?):nil
+M.run_in_split = function(cmd, title)
   vim.cmd ":sv"
 
-  local bufnr = vim.fn.bufadd ""
+  if title == nil then
+    if type(cmd) == "string" then
+      title = cmd
+    else
+      title = vim.fn.join(cmd)
+    end
+  end
+  local bufnr = vim.fn.bufadd(title)
   if bufnr == 0 then
     return
   end
