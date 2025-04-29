@@ -29,7 +29,6 @@ if command -sq nvim
 end
 
 if command -sq jj
-  set -gx JJ_CONFIG ~/.config/jj/config.toml
   alias j 'jj log'
   alias ja 'jj absorb'
   alias jd 'jj diff'
