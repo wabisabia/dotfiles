@@ -28,23 +28,23 @@ truncate_to_repo = false
 [c]
 symbol = ""
 style = 'fg:color_blue'
-format = '[$symbol]($style)'
+format = '[$symbol ]($style)'
 
 [rust]
 symbol = ""
 style = 'fg:color_orange'
-format = '[$symbol]($style)'
+format = '[$symbol ]($style)'
 
 [python]
 symbol = ""
 style = 'fg:color_yellow'
-format = '[$symbol]($style)'
+format = '[$symbol ]($style)'
 detect_extensions = []
 
 [docker_context]
 symbol = ""
 style = 'fg:color_aqua'
-format = '[$symbol]($style)'
+format = '[$symbol ]($style)'
 
 [character]
-format = ' $symbol '
+format = '$symbol '
