@@ -22,9 +22,8 @@ log = "all()"
 
 [ui]
 default-command = "log"
-diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
-diff.tool = ["difft", "--color=always", "$left", "$right"]
-merge-editor = "diffconflicts"
+diff-editor = "diffe"
+diff-formatter = "difft"
 
 [aliases]
 d = ["diff"]
@@ -39,6 +38,14 @@ bu = [
   "-c",
   "jj bookmark move --to @ $(jj log --no-graph -T 'bookmarks.map(|bm| bm.name())' -r 'latest(bookmarks() & ..@)')",
 ]
+
+[merge-tools.diffe]
+program = "nvim"
+edit-args = ["-c", "DiffEditor $left $right $output"]
+
+[merge-tools.difft]
+program = "difft"
+diff-args = ["--color=always", "$left", "$right"]
 
 [merge-tools.diffconflicts]
 program = "nvim"
