@@ -57,6 +57,10 @@ if command -sq terraform
   alias tf terraform
 end
 
+if command -sq kubectl
+  alias k kubectl
+end
+
 if functions -q fzf_configure_bindings
   fzf_configure_bindings --directory=\cf
 end
