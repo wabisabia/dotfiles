@@ -21,7 +21,7 @@ private-commits = "description(glob:'wip:*') | description(glob:'private:*')"
 log = "all()"
 
 [ui]
-default-command = "st"
+default-command = "log"
 diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
 diff.tool = ["difft", "--color=always", "$left", "$right"]
 merge-editor = "diffconflicts"

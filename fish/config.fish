@@ -29,7 +29,7 @@ if command -sq nvim
 end
 
 if command -sq jj
-  alias j 'jj log'
+  alias j 'jj'
   alias ja 'jj absorb'
   alias jd 'jj diff'
   alias je 'jj edit'
