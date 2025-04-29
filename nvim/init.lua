@@ -76,6 +76,9 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.HINT] = "󰌶",
       [vim.diagnostic.severity.INFO] = "",
     }
+  },
+  float = {
+    source = true,
   }
 })
 
