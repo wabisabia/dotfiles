@@ -21,6 +21,7 @@ opt.rtp:prepend(lazypath)
 
 g.mapleader = " "
 g.maplocalleader = "\\"
+table.insert(opt.completeopt, "fuzzy")
 
 -- Important
 
@@ -61,6 +62,15 @@ opt.undofile = true
 opt.timeoutlen = 400
 
 opt.more = false
+
+-- Diagnostics
+
+vim.diagnostic.config({ underline = false, virtual_text = true, source = true, })
+local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
 
 ---@type LazyConfig
 local lazy_cfg = {

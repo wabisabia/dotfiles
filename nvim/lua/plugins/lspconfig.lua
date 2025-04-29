@@ -5,78 +5,40 @@ return {
   version = "*",
   dependencies = "hrsh7th/nvim-cmp",
   config = function()
-    local lspconfig = require "lspconfig"
-    local lsp = require "lsp"
-
     ---@type string[]
     local servers = {
       "bashls",
       "cssls",
       "dockerls",
       "gdscript",
+      "lua_ls",
       "marksman",
+      "basedpyright",
+      "ruff",
       "taplo",
       "terraformls",
+      "typos_lsp",
       "ts_ls",
       "yamlls",
       "zls",
     }
 
-    ---@type fun(client:vim.lsp.Client, bufnr:integer)
-    local on_attach = function(client, bufnr)
-      if client.server_capabilities.inlayHintProvider then
-        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-      end
-      lsp.set_common_lsp_keymaps(bufnr)
-    end
-
-    local cmp_lsp = require "cmp_nvim_lsp"
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities.textDocument = cmp_lsp.default_capabilities().textDocument
-
-    vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
-    vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
-
-    local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-    end
-
-    local border = {
-      { "╭", "FloatBorder" },
-      { "─", "FloatBorder" },
-      { "╮", "FloatBorder" },
-      { "│", "FloatBorder" },
-      { "╯", "FloatBorder" },
-      { "─", "FloatBorder" },
-      { "╰", "FloatBorder" },
-      { "│", "FloatBorder" },
-    }
-
-    local handlers = {
-      ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
-      ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
-    }
-
-    vim.lsp.handlers = vim.tbl_deep_extend("force", vim.lsp.handlers, handlers)
-
     for _, ls in ipairs(servers) do
-      lspconfig[ls].setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
-      }
+      vim.lsp.enable(ls)
     end
 
-    -- lua
+    vim.api.nvim_create_autocmd("LspAttach", {
+      callback = function(args)
+        local lsp = require "lsp"
+        lsp.config(args.buf)
+      end
+    })
 
-    lspconfig.lua_ls.setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
+    vim.lsp.config('lua_ls', {
       on_init = function(client)
         if client.workspace_folders then
           local path = client.workspace_folders[1].name
-          if vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc') then
+          if path ~= vim.fn.stdpath('config') and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then
             return
           end
         end
@@ -114,29 +76,9 @@ return {
           }
         }
       }
-    }
+    })
 
-    -- python
-
-    lspconfig.ruff.setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = {
-        args = {
-          "--line-length=120",
-        },
-      },
-      trace = "messages",
-      init_options = {
-        settings = {
-          logLevel = "debug",
-        },
-      },
-    }
-
-    lspconfig.basedpyright.setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
+    vim.lsp.config("basedpyright", {
       settings = {
         basedpyright = {
           -- Using Ruff's import organizer
@@ -147,29 +89,14 @@ return {
               reportAny = false,
               reportExplicitAny = false,
               reportUnusedCallResult = false,
+              reportImplicitStringConcatenation = false,
             },
           },
         },
       },
-    }
+    })
 
-    lspconfig.jedi_language_server.setup {
-      capabilities = capabilities,
-      ---@type fun(client:vim.lsp.Client, bufnr:integer)
-      on_attach = function(client, bufnr)
-        -- pyright does these better / faster
-        client.server_capabilities.referencesProvider = nil
-        client.server_capabilities.definitionProvider = nil
-        client.server_capabilities.renameProvider = nil
-        on_attach(client, bufnr)
-      end,
-    }
-
-    -- yaml
-
-    lspconfig.yamlls.setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
+    vim.lsp.config("yamlls", {
       settings = {
         yaml = {
           format = {
@@ -178,6 +105,6 @@ return {
           },
         },
       },
-    }
+    })
   end,
 }

@@ -3,7 +3,7 @@ local util = require "util"
 local lsp = require "lsp"
 
 vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-lsp.set_common_lsp_keymaps(bufnr)
+lsp.config(bufnr)
 
 -- override keymaps
 

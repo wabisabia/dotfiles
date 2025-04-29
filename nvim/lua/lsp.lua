@@ -3,7 +3,7 @@ local util = require "util"
 M = {}
 
 ---@type fun(bufnr: integer)
-M.set_common_lsp_keymaps = function(bufnr)
+M.config = function(bufnr)
   local fzf = require("fzf-lua")
 
   -- Navigation
