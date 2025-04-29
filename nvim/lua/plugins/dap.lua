@@ -36,6 +36,7 @@ return {
     util.map("n", "<leader>do", dap.step_out, "debug step out")
     util.map("n", "<leader>dr", dap.restart, "debug restart")
     util.map("n", "<leader>dp", dap.pause, "debug pause")
-    util.map("n", "<leader>dq", dap.repl.toggle, "debug REPL")
+    util.map("n", "<leader>dq", dap.terminate, "debug terminate")
+    util.map("n", "<leader>dt", dap.repl.toggle, "debug REPL")
   end,
 }
