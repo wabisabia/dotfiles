@@ -54,7 +54,7 @@ M.run_in_split = function(cmd, title)
 
   vim.cmd(":b" .. bufnr)
 
-  vim.fn.termopen(cmd)
+  vim.fn.jobstart(cmd, { term = true })
 end
 
 return M
