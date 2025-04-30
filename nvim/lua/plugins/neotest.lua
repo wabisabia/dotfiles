@@ -13,7 +13,7 @@ return {
     local neotest = require "neotest"
     local util = require "util"
 
-    util.map("n", "t", function()
+    util.map("n", "t*", function()
       neotest.summary.open()
       neotest.run.run(vim.fn.getcwd())
     end, "Run all tests in project")
