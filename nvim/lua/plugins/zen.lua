@@ -1,4 +1,4 @@
----require("lazy")
+---@module "lazy"
 ---@type LazyPluginSpec
 return {
   "folke/zen-mode.nvim",

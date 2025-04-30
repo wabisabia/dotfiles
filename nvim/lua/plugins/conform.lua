@@ -1,4 +1,4 @@
----require("lazy")
+---@module "lazy"
 ---@type LazyPluginSpec
 return {
   "stevearc/conform.nvim",
@@ -14,7 +14,7 @@ return {
         yaml = { "yamlfmt" },
       },
 
-      ---require("conform")
+      ---@module "conform"
       ---@type table<string, conform.FormatterConfigOverride>
       formatters = {
         jsonformat = {
