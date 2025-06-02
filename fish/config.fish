@@ -30,6 +30,20 @@ end
 
 if command -sq jj
   set -gx JJ_CONFIG ~/.config/jj/config.toml
+  alias j 'jj log'
+  alias ja 'jj absorb'
+  alias jd 'jj diff'
+  alias je 'jj edit'
+  alias jl 'jj log'
+  alias jn 'jj new'
+  alias jr 'jj rebase'
+  alias js 'jj status'
+  alias ju 'jj undo'
+  alias jab 'jj abandon'
+  alias jbc 'jj bookmark create'
+  alias jbm 'jj bookmark move'
+  alias jsh 'jj show'
+  alias jsq 'jj squash'
 end
 
 if functions -q fzf_configure_bindings

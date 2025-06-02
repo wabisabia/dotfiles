@@ -22,13 +22,14 @@ private-commits = "description(glob:'wip:*') | description(glob:'private:*')"
 log = "all()"
 
 [ui]
-default-command = "log"
+default-command = "st"
 diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
 diff.tool = ["difft", "--color=always", "$left", "$right"]
 merge-editor = "diffconflicts"
 
 [aliases]
 d = ["diff"]
+l = ["log"]
 pull = ["git", "fetch"]
 push = ["git", "push"]
 bu = [
