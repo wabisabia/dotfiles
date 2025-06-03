@@ -42,6 +42,8 @@ if command -sq jj
   alias jab 'jj abandon'
   alias jbc 'jj bookmark create'
   alias jbm 'jj bookmark move'
+  alias jds 'jj desc'
+  alias jps 'jj git push'
   alias jsh 'jj show'
   alias jsq 'jj squash'
 end
