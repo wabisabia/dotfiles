@@ -43,6 +43,7 @@ if command -sq jj
   alias jbc 'jj bookmark create'
   alias jbm 'jj bookmark move'
   alias jds 'jj desc'
+  alias jpl 'jj git fetch'
   alias jps 'jj git push'
   alias jsh 'jj show'
   alias jsq 'jj squash'
