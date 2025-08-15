@@ -3,10 +3,7 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
   main = "ibl",
-  version = "*",
-  opts = {
-    scope = {
-      enabled = false,
-    },
-  },
+  ---@module "ibl"
+  ---@type ibl.config
+  opts = {},
 }
