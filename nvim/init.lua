@@ -58,6 +58,7 @@ opt.tabstop = 2
 opt.softtabstop = 2
 
 opt.undofile = true
+opt.swapfile = false
 
 opt.timeoutlen = 400
 
