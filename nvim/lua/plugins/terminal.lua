@@ -11,6 +11,7 @@ return {
 
     tt.setup {
       open_mapping = [[<c-t>]],
+      auto_scroll = false,
     }
   end,
 }
