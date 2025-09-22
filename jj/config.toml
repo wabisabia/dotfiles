@@ -48,3 +48,11 @@ merge-args = [
   "$output",
 ]
 merge-tool-edits-conflict-markers = true
+
+[fix.tools.1-ruff-lint]
+command = ["uv", "run", "ruff", "check", "--fix", "--quiet", "--stdin-filename=$path", "-"]
+patterns = ["glob:'**/*.py'"]
+
+[fix.tools.2-ruff-format]
+command = ["uv", "run", "ruff", "format", "--stdin-filename=$path", "-"]
+patterns = ["glob:'**/*.py'"]
