@@ -28,14 +28,7 @@ d = ["diff"]
 l = ["log"]
 pull = ["git", "fetch"]
 push = ["git", "push"]
-bu = [
-  "util",
-  "exec",
-  "--",
-  "bash",
-  "-c",
-  "jj bookmark move --to @ $(jj log --no-graph -T 'bookmarks.map(|bm| bm.name())' -r 'latest(bookmarks() & ..@)')",
-]
+tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
 
 [merge-tools.diffe]
 program = "nvim"
