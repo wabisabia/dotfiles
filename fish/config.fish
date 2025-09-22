@@ -48,6 +48,7 @@ if command -sq jj
   alias jbu 'jj bookmark untrack'
   alias jds 'jj desc'
   alias jpl 'jj git fetch'
+  alias jpr 'jj pr'
   alias jps 'jj git push'
   alias jsh 'jj show'
   alias jsp 'jj split'
