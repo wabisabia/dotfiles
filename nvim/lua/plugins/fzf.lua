@@ -12,8 +12,9 @@ return {
           symbol_fmt = function(s) return s end,
         },
       },
-      register_ui_select = true,
     })
+
+    fzf.register_ui_select()
 
     local util = require("util")
 
