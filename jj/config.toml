@@ -4,6 +4,9 @@
 name = "Christian Dunn"
 email = "chrisd@wabisabia.com"
 
+[merge]
+hunk-level = "word"
+
 [git]
 private-commits = "description(glob:'wip:*') | description(glob:'private:*')"
 
