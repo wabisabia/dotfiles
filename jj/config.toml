@@ -17,9 +17,6 @@ private-commits = "description(glob:'wip:*') | description(glob:'private:*')"
 "branch(x)" = "fork_point(bookmarks(x) | trunk())..bookmarks(x)"
 "me" = "fork_point(mine() & mutable())::"
 
-[revsets]
-log = "all()"
-
 [ui]
 default-command = "log"
 diff-editor = "diffe"
