@@ -23,6 +23,7 @@ diff-editor = "diffe"
 diff-formatter = "difft"
 
 [aliases]
+clone = ["git", "clone", "--colocate"]
 d = ["diff"]
 l = ["log"]
 pull = ["git", "fetch"]
