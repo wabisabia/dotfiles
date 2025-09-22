@@ -9,6 +9,7 @@ M.config = function(bufnr)
   -- Navigation
   util.map("n", "gd", vim.lsp.buf.definition, "Go to definition", bufnr)
   util.map("n", "gD", vim.lsp.buf.declaration, "Go to declaration", bufnr)
+  util.map("n", "grr", fzf.lsp_references, "List references", bufnr)
   util.map("n", "<leader>s", fzf.lsp_document_symbols, "Go to symbol in buffer", bufnr)
   util.map("n", "<leader>S", fzf.lsp_live_workspace_symbols, "Go to symbol", bufnr)
   util.map("n", "<leader>fe", fzf.diagnostics_document, "Search document diagnostics", bufnr)
