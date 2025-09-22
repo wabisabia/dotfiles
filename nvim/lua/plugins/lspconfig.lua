@@ -73,6 +73,7 @@ return {
         }
       },
       ruff = {},
+      shellcheck = {},
       taplo = {},
       terraformls = {},
       typos_lsp = {},
