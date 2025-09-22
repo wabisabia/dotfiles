@@ -11,11 +11,11 @@ util.map("n", "K", function()
   vim.cmd.RustLsp { "hover", "actions" }
 end, "open hover float", bufnr)
 
-util.map("n", "L", function()
+util.map("n", "<C-w>d", function()
   vim.cmd.RustLsp { "renderDiagnostic", "current" }
 end, "open diagnostic float", bufnr)
 
-util.map("n", "<leader>a", function()
+util.map("n", "gra", function()
   vim.cmd.RustLsp "codeAction"
 end, "list code actions", bufnr)
 
