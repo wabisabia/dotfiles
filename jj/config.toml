@@ -34,7 +34,7 @@ pr = [
   "--template",
   "change_list",
   "--revisions",
-  "branch & ~description(exact:'')",
+  "branch & ~@ & ~description(exact:'')",
 ]
 ghpr = [
   "log",
@@ -43,11 +43,11 @@ ghpr = [
   "--template",
   "change_list_bold",
   "--revisions",
-  "branch & ~description(exact:'')",
+  "branch & ~@ & ~description(exact:'')",
 ]
 
 [revset-aliases]
-branch = "main..@ & ~private"
+branch = "@ | main..@ & ~private"
 private = "description(glob:'{wip,private,optional}*')"
 
 [merge-tools.diffe]
