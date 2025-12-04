@@ -66,22 +66,32 @@ opt.more = false
 
 -- Diagnostics
 
-vim.diagnostic.config({
-  underline = false,
-  virtual_text = true,
-  source = true,
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = "󰅚",
-      [vim.diagnostic.severity.WARN] = "󰀪",
-      [vim.diagnostic.severity.HINT] = "󰌶",
-      [vim.diagnostic.severity.INFO] = "",
-    }
-  },
+---@type vim.diagnostic.Opts
+local diagnostics = {
+  severity_sort = true,
+  update_in_insert = true,
   float = {
     source = true,
-  }
-})
+  },
+  underline = false,
+  virtual_text = true,
+  signs = {
+    -- text = {
+    --   [vim.diagnostic.severity.ERROR] = "󰅚",
+    --   [vim.diagnostic.severity.WARN]  = "󰀪",
+    --   [vim.diagnostic.severity.HINT]  = "󰌶",
+    --   [vim.diagnostic.severity.INFO]  = "",
+    -- },
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = "ErrorMsg",
+      [vim.diagnostic.severity.WARN] = "WarningMsg",
+      [vim.diagnostic.severity.HINT] = "HintMsg",
+      [vim.diagnostic.severity.INFO] = "InfoMsg",
+    },
+  },
+}
+
+vim.diagnostic.config(diagnostics)
 
 -- File types
 
