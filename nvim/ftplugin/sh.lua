@@ -1,3 +1,5 @@
+vim.treesitter.start()
+
 local util = require "util"
 
 util.map("n", "<leader>ar", function()

@@ -1,3 +1,7 @@
+vim.treesitter.start()
+
+vim.lsp.inlay_hint.enable()
+
 local util = require "util"
 
 util.map("n", "<leader>r", function()
