@@ -16,9 +16,13 @@ change_list = "'- ' ++ self.description().first_line() ++ '\n'"
 change_list_bold = "'- **' ++ self.description().first_line() ++ '**\n'"
 
 [ui]
-default-command = "log"
+default-command = [
+  "log",
+  "-r",
+  "branch | branch_point | (heads_since_branch_point & mutable()) | trunk()",
+]
 diff-editor = "diffe"
-diff-formatter = "difft"
+diff-formatter = "dt"
 
 [aliases]
 clone = ["git", "clone"]
@@ -26,7 +30,6 @@ d = ["diff"]
 l = ["log"]
 pull = ["git", "fetch"]
 push = ["git", "push"]
-tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
 pr = [
   "log",
   "--reversed",
@@ -34,7 +37,7 @@ pr = [
   "--template",
   "change_list",
   "--revisions",
-  "branch & ~@ & ~description(exact:'')",
+  "pr",
 ]
 ghpr = [
   "log",
@@ -43,20 +46,41 @@ ghpr = [
   "--template",
   "change_list_bold",
   "--revisions",
-  "branch & ~@ & ~description(exact:'')",
+  "pr",
 ]
 
 [revset-aliases]
-branch = "@ | main..@ & ~private"
+branch = "branch_point..fork_point(heads(@))"
+heads_since_branch_point = "heads(branch_point::)"
+"branch_point" = "fork_point(@ | trunk())"
+
+pr = "branch & ~private & ~indescribable & ~description(glob:'Merge *')"
+indescribable = "description(exact:'') | empty()"
 private = "description(glob:'{wip,private,optional}*')"
+
+[templates]
+draft_commit_description = '''
+concat(
+  builtin_draft_commit_description_with_diff,
+  "\nJJ: ignore-rest\n",
+  diff.git(),
+)
+'''
 
 [merge-tools.diffe]
 program = "nvim"
-edit-args = ["-c", "DiffEditor $left $right $output"]
+edit-args = [
+  "-c",
+  "DiffEditor $left $right $output",
+]
 
-[merge-tools.difft]
+[merge-tools.dt]
 program = "difft"
-diff-args = ["--color=always", "$left", "$right"]
+diff-args = [
+  "--color=always",
+  "$left",
+  "$right",
+]
 
 [merge-tools.diffconflicts]
 program = "nvim"
@@ -70,9 +94,25 @@ merge-args = [
 merge-tool-edits-conflict-markers = true
 
 [fix.tools.1-ruff-lint]
-command = ["uv", "run", "ruff", "check", "--fix", "--quiet", "--stdin-filename=$path", "-"]
+command = [
+  "uv",
+  "run",
+  "ruff",
+  "check",
+  "--fix",
+  "--quiet",
+  "--stdin-filename=$path",
+  "-"
+]
 patterns = ["glob:'**/*.py'"]
 
 [fix.tools.2-ruff-format]
-command = ["uv", "run", "ruff", "format", "--stdin-filename=$path", "-"]
+command = [
+  "uv",
+  "run",
+  "ruff",
+  "format",
+  "--stdin-filename=$path",
+  "-",
+]
 patterns = ["glob:'**/*.py'"]
