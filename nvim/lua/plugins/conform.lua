@@ -12,6 +12,7 @@ return {
         json = { "jsonformat" },
         sh = { "shfmt" },
         yaml = { "yamlfmt" },
+        ["yaml.ghactions"] = { "yamlfmt" },
       },
 
       ---@module "conform"
