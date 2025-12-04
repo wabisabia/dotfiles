@@ -6,6 +6,12 @@ set fish_greeting
 
 fish_vi_key_bindings
 
+bind -M insert \cn down-or-search
+bind -M insert \cp up-or-search
+bind -M insert \cy accept-autosuggestion
+bind -M insert \cn complete
+bind -M insert \ce cancel
+
 if command -sq starship
   starship init fish | source
 end
