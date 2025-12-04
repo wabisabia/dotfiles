@@ -8,11 +8,11 @@ set fish_greeting
 
 fish_vi_key_bindings
 
-bind -M insert \cn down-or-search
-bind -M insert \cp up-or-search
-bind -M insert \cy accept-autosuggestion
-bind -M insert \cn complete
-bind -M insert \ce cancel
+bind -M insert ctrl-n down-or-search
+bind -M insert ctrl-p up-or-search
+bind -M insert ctrl-y accept-autosuggestion
+bind -M insert ctrl-n complete
+bind -m insert ctrl-_ history-pager repaint-mode
 
 if command -sq starship
   starship init fish | source
@@ -72,8 +72,9 @@ if command -sq kubectl
   alias k kubectl
 end
 
-if functions -q fzf_configure_bindings
-  fzf_configure_bindings --directory=\cf
+if command -sq fzf
+  fzf_configure_bindings --directory=ctrl-f
+end
 end
 
 if command -sq tmux; and not set -q TMUX; and not tmux a 2>/dev/null
