@@ -12,6 +12,8 @@ private-commits = "private"
 "format_short_id(id)" = "id.shortest()"
 "format_timestamp(timestamp)" = "timestamp.ago()"
 "format_short_signature(signature)" = "signature.email().local()"
+change_list = "'- ' ++ self.description().first_line() ++ '\n'"
+change_list_bold = "'- **' ++ self.description().first_line() ++ '**\n'"
 
 [ui]
 default-command = "log"
@@ -25,7 +27,15 @@ l = ["log"]
 pull = ["git", "fetch"]
 push = ["git", "push"]
 tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
-pr = ["log", "--reversed", "--no-graph", "--template", "'- ' ++ self.description().first_line() ++ '\n'", "--revisions", "main..@ & ~description(exact:'')"]
+pr = [
+  "log",
+  "--reversed",
+  "--no-graph",
+  "--template",
+  "change_list",
+  "--revisions",
+  "branch & ~description(exact:'')",
+]
 
 [revset-aliases]
 branch = "main..@ & ~private"
