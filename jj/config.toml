@@ -50,11 +50,18 @@ ghpr = [
 ]
 
 [revset-aliases]
-branch = "branch_point..fork_point(heads(@))"
-heads_since_branch_point = "heads(branch_point::)"
-"branch_point" = "fork_point(@ | trunk())"
+"branch" = "branch(@)"
+"branch(x)" = "branch_point(x)..fork_point(heads(x))"
 
-pr = "branch & ~private & ~indescribable & ~description(glob:'Merge *')"
+"heads_since_branch_point" = "heads_since_branch_point(@)"
+"heads_since_branch_point(x)" = "heads(branch_point(x)::)"
+
+"branch_point" = "branch_point(@)"
+"branch_point(x)" = "fork_point(x | trunk())"
+
+"pr" = "pr(@)"
+"pr(x)" = "branch(x) & ~private & ~indescribable & ~description(glob:'Merge *')"
+
 indescribable = "description(exact:'') | empty()"
 private = "description(glob:'{wip,private,optional}*')"
 
