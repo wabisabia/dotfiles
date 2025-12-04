@@ -31,6 +31,8 @@ opt.ignorecase = true
 opt.relativenumber = true
 opt.number = true
 
+opt.wrapscan = false
+
 opt.inccommand = "split"
 
 opt.termguicolors = true
@@ -41,7 +43,7 @@ opt.wrap = false
 
 opt.colorcolumn = "120"
 
-opt.scrolloff = 15
+opt.scrolloff = 7
 
 opt.splitbelow = true
 opt.splitright = true
@@ -53,9 +55,11 @@ opt.cursorlineopt = "screenline,number"
 
 opt.expandtab = true
 opt.shiftwidth = 2
-opt.smartindent = true
 opt.tabstop = 2
 opt.softtabstop = 2
+
+opt.list = true
+opt.listchars = 'tab:» ,lead:•,trail:•'
 
 opt.undofile = true
 opt.swapfile = false
@@ -97,7 +101,7 @@ vim.diagnostic.config(diagnostics)
 
 vim.filetype.add({
   extension = {
-    tf = "terraform"
+    tf = "terraform",
   },
   pattern = {
     [".*/%.github/workflows/.*%.ya?ml"] = "yaml.ghactions",
@@ -111,6 +115,7 @@ local servers = {
   "docker_language_server",
   "dockerls",
   "gh_actions_ls",
+  "gopls",
   "jsonls",
   "lua_ls",
   "marksman",
@@ -119,6 +124,8 @@ local servers = {
   "ruff",
   "terraformls",
   "tombi",
+  "ts_ls",
+  "ty",
   "typos_lsp",
   "yamlls",
 }
@@ -126,6 +133,13 @@ local servers = {
 for _, server in ipairs(servers) do
   vim.lsp.enable(server)
 end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local lsp = require "lsp"
+    lsp.config(args.buf)
+  end
+})
 
 ---@type LazyConfig
 local lazy_cfg = {
@@ -135,7 +149,7 @@ local lazy_cfg = {
   install = { colorscheme = { "kanagawa-dragon" } },
   ui = {
     border = "rounded"
-  }
+  },
 }
 
 require("lazy").setup(lazy_cfg)

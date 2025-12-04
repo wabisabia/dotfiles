@@ -1,20 +1,3 @@
-local function set_python_path(command)
-  local path = command.args
-  local clients = vim.lsp.get_clients {
-    bufnr = vim.api.nvim_get_current_buf(),
-    name = 'basedpyright',
-  }
-  for _, client in ipairs(clients) do
-    if client.settings then
-      ---@diagnostic disable-next-line: param-type-mismatch
-      client.settings.python = vim.tbl_deep_extend('force', client.settings.python or {}, { pythonPath = path })
-    else
-      client.config.settings = vim.tbl_deep_extend('force', client.config.settings, { python = { pythonPath = path } })
-    end
-    client:notify('workspace/didChangeConfiguration', { settings = nil })
-  end
-end
-
 ---@type vim.lsp.Config
 return {
   cmd = { 'basedpyright-langserver', '--stdio' },
@@ -49,25 +32,29 @@ return {
     },
   },
   on_attach = function(client, bufnr)
-    vim.api.nvim_buf_create_user_command(bufnr, 'LspPyrightOrganizeImports', function()
-      local params = {
-        command = 'basedpyright.organizeimports',
-        arguments = { vim.uri_from_bufnr(bufnr) },
-      }
-
-      -- Using client.request() directly because "basedpyright.organizeimports" is private
-      -- (not advertised via capabilities), which client:exec_cmd() refuses to call.
-      -- https://github.com/neovim/neovim/blob/c333d64663d3b6e0dd9aa440e433d346af4a3d81/runtime/lua/vim/lsp/client.lua#L1024-L1030
-      ---@diagnostic disable-next-line: param-type-mismatch
-      client.request('workspace/executeCommand', params, nil, bufnr)
-    end, {
-      desc = 'Organize Imports',
-    })
-
-    vim.api.nvim_buf_create_user_command(bufnr, 'LspPyrightSetPythonPath', set_python_path, {
-      desc = 'Reconfigure basedpyright with the provided python path',
-      nargs = 1,
-      complete = 'file',
-    })
+    client.server_capabilities.callHierarchyProvider = nil
+    client.server_capabilities.codeActionProvider = nil
+    client.server_capabilities.codeLensProvider = nil
+    client.server_capabilities.colorProvider = nil
+    client.server_capabilities.completionProvider = nil
+    client.server_capabilities.declarationProvider = nil
+    client.server_capabilities.definitionProvider = nil
+    client.server_capabilities.documentFormattingProvider = nil
+    client.server_capabilities.documentHighlightProvider = nil
+    client.server_capabilities.documentLinkProvider = nil
+    client.server_capabilities.documentOnTypeFormattingProvider = nil
+    client.server_capabilities.documentRangeFormattingProvider = nil
+    client.server_capabilities.documentSymbolProvider = nil
+    client.server_capabilities.executeCommandProvider = nil
+    client.server_capabilities.foldingRangeProvider = nil
+    client.server_capabilities.implementationProvider = nil
+    client.server_capabilities.inlineCompletionProvider = nil
+    client.server_capabilities.inlineValueProvider = nil
+    client.server_capabilities.referencesProvider = nil
+    client.server_capabilities.renameProvider = nil
+    client.server_capabilities.semanticTokensProvider = nil
+    client.server_capabilities.typeDefinitionProvider = nil
+    client.server_capabilities.typeHierarchyProvider = nil
+    client.server_capabilities.workspaceSymbolProvider = nil
   end,
 }

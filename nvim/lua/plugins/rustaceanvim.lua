@@ -3,7 +3,7 @@
 return {
   "mrcjkb/rustaceanvim",
   version = "^9",
-  lazy = false,
+  ft = { "rust", "toml" },
   config = function()
     require("neotest").setup {
       adapters = {

@@ -2,8 +2,12 @@
 ---@type LazyPluginSpec
 return {
   "julienvincent/hunk.nvim",
-  version = "*",
-  dependencies = "MunifTanjim/nui.nvim",
-  cmd = "DiffEditor",
-  opts = {}
+  cmd = {
+    "HunkDiffView",
+    "HunkDiffEditor",
+  },
+  dependencies = {
+    "MunifTanjim/nui.nvim",
+    "nvim-mini/mini.icons",
+  }
 }

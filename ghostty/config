@@ -1,4 +1,12 @@
-font-family = FantasqueSansM Nerd Font Mono
-font-size = 18
-macos-option-as-alt = left
+# Behaviour
+macos-option-as-alt = true
+
+# Visuals
 macos-titlebar-style = hidden
+theme = Gruvbox Dark
+font-size = 16
+# font-family = ComicShannsMono Nerd Font
+# font-family = DepartureMono Nerd Font
+# font-family = AnnotationM Nerd Font
+font-family = GoogleSansCode Nerd Font
+# font-family = IosevkaTermSlab Nerd Font

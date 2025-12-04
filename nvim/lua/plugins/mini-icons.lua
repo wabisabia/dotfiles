@@ -1,6 +1,6 @@
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
-  "echasnovski/mini.icons",
+  "nvim-mini/mini.icons",
   version = "*",
 }

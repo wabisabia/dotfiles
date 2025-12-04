@@ -1,0 +1,122 @@
+[[actions]]
+name = "files.open"
+lua = "open_files()"
+
+[[actions]]
+name = "github.pr.create"
+lua = "github_pr_create()"
+
+[[bindings]]
+scope = "revisions"
+key = "h"
+action = "github.pr.create"
+desc = "create github PR"
+
+[[bindings]]
+scope = "revisions.details"
+key = "shift+o"
+action = "files.open"
+desc = "open selected files"
+
+[[bindings]]
+scope = "revisions"
+key = "shift+o"
+action = "files.open"
+desc = "open selected files"
+
+[[bindings]]
+scope = "revisions"
+key = "shift+g"
+action = "revisions.go_to_bottom"
+desc = "bottom"
+
+[[bindings]]
+scope = "revisions"
+key = "ctrl+g"
+action = "revisions.go_to_top"
+desc = "top"
+
+[[bindings]]
+scope = "revisions.rebase"
+key = "shift+g"
+action = "revisions.go_to_bottom"
+desc = "bottom"
+
+[[bindings]]
+scope = "revisions.rebase"
+key = "g"
+action = "revisions.go_to_top"
+desc = "top"
+
+[[bindings]]
+scope = "revisions.squash"
+key = "shift+g"
+action = "revisions.go_to_bottom"
+desc = "bottom"
+
+[[bindings]]
+scope = "revisions.squash"
+key = "g"
+action = "revisions.go_to_top"
+desc = "top"
+
+[[bindings]]
+scope = "revisions.revert"
+key = "shift+g"
+action = "revisions.go_to_bottom"
+desc = "bottom"
+
+[[bindings]]
+scope = "revisions.revert"
+key = "g"
+action = "revisions.go_to_top"
+desc = "top"
+
+[[bindings]]
+scope = "revisions.duplicate"
+key = "shift+g"
+action = "revisions.go_to_bottom"
+desc = "bottom"
+
+[[bindings]]
+scope = "revisions.duplicate"
+key = "g"
+action = "revisions.go_to_top"
+desc = "top"
+
+[[bindings]]
+scope = "revisions.abandon"
+key = "shift+g"
+action = "revisions.go_to_bottom"
+desc = "bottom"
+
+[[bindings]]
+scope = "revisions.abandon"
+key = "g"
+action = "revisions.go_to_top"
+desc = "top"
+
+[[bindings]]
+scope = "revisions.absorb"
+key = "shift+g"
+action = "revisions.go_to_bottom"
+desc = "bottom"
+
+[[bindings]]
+scope = "revisions.absorb"
+key = "g"
+action = "revisions.go_to_top"
+desc = "top"
+
+[[bindings]]
+scope = "revisions.set_parents"
+key = "shift+g"
+action = "revisions.go_to_bottom"
+desc = "bottom"
+
+[[bindings]]
+scope = "revisions.set_parents"
+key = "g"
+action = "revisions.go_to_top"
+desc = "top"
+

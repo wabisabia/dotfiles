@@ -25,7 +25,7 @@ return {
       },
 
       format_on_save = function(bufnr)
-        if vim.o.ft == "yaml" then
+        if vim.o.ft == "yaml" or vim.o.ft == "toml" then
           return
         end
         if vim.b[bufnr].disable_autoformat then

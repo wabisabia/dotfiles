@@ -74,6 +74,7 @@ local function get_repos_config()
   }
 end
 
+---@type vim.lsp.Config
 return {
   cmd = { "actions-languageserver", "--stdio" },
   filetypes = { "yaml.ghactions" },

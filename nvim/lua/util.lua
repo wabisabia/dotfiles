@@ -1,9 +1,14 @@
 local M = {}
 
----@type fun(modes:string|string[], lhs:string, rhs:string|function, desc:string, bufnr?:integer|boolean)
----@param buffer? integer|boolean Creates buffer-local mapping, `0` or `true` for current buffer.
-M.map = function(mode, lhs, rhs, desc, buffer)
-  vim.keymap.set(mode, lhs, rhs, { desc = desc, buffer = buffer })
+--- @alias Mode "n" | "v" | "x" | "s" | "o"
+
+---@param mode Mode|Mode[]
+---@param lhs string
+---@param rhs string|fun()
+---@param desc string
+---@param bufnr? integer|boolean Creates buffer-local mapping, `0` or `true` for current buffer.
+M.map = function(mode, lhs, rhs, desc, bufnr)
+  vim.keymap.set(mode, lhs, rhs, { desc = desc, buffer = bufnr })
 end
 
 --- @class util.input.Opts

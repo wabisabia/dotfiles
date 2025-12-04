@@ -11,7 +11,7 @@ private-commits = "private"
 [template-aliases]
 "format_short_id(id)" = "id.shortest()"
 "format_timestamp(timestamp)" = "timestamp.ago()"
-"format_short_signature(signature)" = "signature.email().local()"
+"format_short_signature(signature)" = "truncate_end(8, signature.name(), '...')"
 change_list = "'- ' ++ self.description().first_line() ++ '\n'"
 change_list_bold = "'- **' ++ self.description().first_line() ++ '**\n'"
 
@@ -19,8 +19,9 @@ change_list_bold = "'- **' ++ self.description().first_line() ++ '**\n'"
 default-command = [
   "log",
   "-r",
-  "branch | branch_point | (heads_since_branch_point & mutable()) | trunk()",
+  "(present(@) | trunk() | (tracked_remote_bookmarks() & trunk()..) | branch_point | branch | (heads_since_branch_point & mutable())) & visible()",
 ]
+diff-instructions = false
 diff-editor = "diffe"
 diff-formatter = "dt"
 
@@ -53,14 +54,14 @@ ghpr = [
 "branch" = "branch(@)"
 "branch(x)" = "branch_point(x)..fork_point(heads(x))"
 
-"heads_since_branch_point" = "heads_since_branch_point(@)"
-"heads_since_branch_point(x)" = "heads(branch_point(x)::)"
-
 "branch_point" = "branch_point(@)"
 "branch_point(x)" = "fork_point(x | trunk())"
 
 "pr" = "pr(@)"
 "pr(x)" = "branch(x) & ~private & ~indescribable & ~description(glob:'Merge *')"
+
+"heads_since_branch_point" = "heads_since_branch_point(@)"
+"heads_since_branch_point(x)" = "heads(branch_point(x)::)"
 
 indescribable = "description(exact:'') | empty()"
 private = "description(glob:'{wip,private,optional}*')"
@@ -72,12 +73,13 @@ draft_commit_description = "builtin_draft_commit_description_with_diff"
 program = "nvim"
 edit-args = [
   "-c",
-  "DiffEditor $left $right $output",
+  "HunkDiffEditor $left $right $output",
 ]
 
 [merge-tools.dt]
 program = "difft"
 diff-args = [
+  "--width=$width",
   "--color=always",
   "$left",
   "$right",
@@ -92,6 +94,20 @@ merge-args = [
   "JJDiffConflicts",
   "$output",
 ]
+
+[merge-tools.hunk]
+program = "sh"
+diff-invocation-mode = "dir"
+diff-do-chdir = false
+conflict-marker-style = "snapshot"
+diff-args = [
+  "-c",
+  'exec nvim -c "HunkDiffView $1 $2" </dev/tty >/dev/tty',
+  "hunk-difftool",
+  "$left",
+  "$right",
+]
+
 merge-tool-edits-conflict-markers = true
 
 [fix.tools.1-ruff-lint]
