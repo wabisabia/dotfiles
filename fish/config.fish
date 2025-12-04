@@ -40,6 +40,7 @@ if command -sq jj
   alias jbm 'jj bookmark move'
   alias jbt 'jj bookmark track'
   alias jbu 'jj bookmark untrack'
+  alias jde 'jj diffedit'
   alias jds 'jj desc'
   alias jpl 'jj git fetch'
   alias jpr 'jj pr'
