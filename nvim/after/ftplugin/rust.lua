@@ -1,9 +1,7 @@
 local bufnr = vim.api.nvim_get_current_buf()
 local util = require "util"
-local lsp = require "lsp"
 
 vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-lsp.config(bufnr)
 
 -- override keymaps
 

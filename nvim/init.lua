@@ -126,13 +126,6 @@ for _, server in ipairs(servers) do
   vim.lsp.enable(server)
 end
 
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    local lsp = require "lsp"
-    lsp.config(args.buf)
-  end
-})
-
 ---@type LazyConfig
 local lazy_cfg = {
   spec = {
