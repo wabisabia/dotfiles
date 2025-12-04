@@ -1,5 +1,3 @@
-"$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
-
 [user]
 name = "Christian Dunn"
 email = "chris@wabisabia.com"
