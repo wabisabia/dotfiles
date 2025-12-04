@@ -28,6 +28,7 @@ tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
 pr = ["log", "--reversed", "--no-graph", "--template", "'- ' ++ self.description().first_line() ++ '\n'", "--revisions", "main..@ & ~description(exact:'')"]
 
 [revset-aliases]
+branch = "main..@ & ~private"
 private = "description(glob:'{wip,private,optional}*')"
 
 [merge-tools.diffe]
