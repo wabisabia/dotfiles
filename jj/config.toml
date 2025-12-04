@@ -6,7 +6,7 @@ email = "chris@wabisabia.com"
 hunk-level = "word"
 
 [git]
-private-commits = "description(glob:'wip:*') | description(glob:'private:*')"
+private-commits = "private"
 
 [template-aliases]
 "format_short_id(id)" = "id.shortest()"
@@ -26,6 +26,9 @@ pull = ["git", "fetch"]
 push = ["git", "push"]
 tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
 pr = ["log", "--reversed", "--no-graph", "--template", "'- ' ++ self.description().first_line() ++ '\n'", "--revisions", "main..@ & ~description(exact:'')"]
+
+[revset-aliases]
+private = "description(glob:'{wip,private,optional}*')"
 
 [merge-tools.diffe]
 program = "nvim"
