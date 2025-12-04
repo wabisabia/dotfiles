@@ -114,6 +114,7 @@ local servers = {
   "jsonls",
   "lua_ls",
   "marksman",
+  "nil_ls",
   "postgres_lsp",
   "ruff",
   "terraformls",

@@ -10,6 +10,7 @@ return {
     conform.setup({
       formatters_by_ft = {
         json = { "jsonformat" },
+        nix = { "alejandra" },
         sh = { "shfmt" },
         yaml = { "yamlfmt" },
         ["yaml.ghactions"] = { "yamlfmt" },
