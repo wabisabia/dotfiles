@@ -9,6 +9,7 @@ fish/completions/
 fish/functions/
 fish/conf.d/
 tmux/plugins/
+jj/repos/
 
 # No version constraints needed
 lazy-lock.json
