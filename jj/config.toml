@@ -59,13 +59,7 @@ indescribable = "description(exact:'') | empty()"
 private = "description(glob:'{wip,private,optional}*')"
 
 [templates]
-draft_commit_description = '''
-concat(
-  builtin_draft_commit_description_with_diff,
-  "\nJJ: ignore-rest\n",
-  diff.git(),
-)
-'''
+draft_commit_description = "builtin_draft_commit_description_with_diff"
 
 [merge-tools.diffe]
 program = "nvim"
