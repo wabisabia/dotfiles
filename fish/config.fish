@@ -23,7 +23,7 @@ if command -sq nvim
 end
 
 if command -sq jj
-  alias j 'jj'
+  alias j 'jj log -r "fork_point(main | branch)::(main | branch)"'
   alias ja 'jj absorb'
   alias jc 'jj commit'
   alias jd 'jj diff'
