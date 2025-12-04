@@ -83,6 +83,45 @@ vim.diagnostic.config({
   }
 })
 
+-- File types
+
+vim.filetype.add({
+  extension = {
+    tf = "terraform"
+  },
+  pattern = {
+    [".*/%.github/workflows/.*%.ya?ml"] = "yaml.ghactions",
+  }
+})
+
+local servers = {
+  "basedpyright",
+  "bashls",
+  "docker_language_server",
+  "dockerls",
+  "gh_actions_ls",
+  "jsonls",
+  "lua_ls",
+  "marksman",
+  "postgres_lsp",
+  "ruff",
+  "terraformls",
+  "tombi",
+  "typos_lsp",
+  "yamlls",
+}
+
+for _, server in ipairs(servers) do
+  vim.lsp.enable(server)
+end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local lsp = require "lsp"
+    lsp.config(args.buf)
+  end
+})
+
 ---@type LazyConfig
 local lazy_cfg = {
   spec = {
