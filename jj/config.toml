@@ -36,6 +36,15 @@ pr = [
   "--revisions",
   "branch & ~description(exact:'')",
 ]
+ghpr = [
+  "log",
+  "--reversed",
+  "--no-graph",
+  "--template",
+  "change_list_bold",
+  "--revisions",
+  "branch & ~description(exact:'')",
+]
 
 [revset-aliases]
 branch = "main..@ & ~private"
